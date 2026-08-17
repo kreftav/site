@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giro Mídia — Ver de cima, muda tudo</title>
+<meta name="description" content="Giro Mídia: fotografia, vídeo, drone e tours virtuais 360° em Francisco Beltrão e região. Ver de cima, muda tudo.">
+<link rel="icon" href="assets/logo_giro.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /*
+    Fontes da marca: "Destaque" = Horizon / "Conteúdo" = Oswald.
+    Horizon não é uma fonte pública (não está no Google Fonts e as versões
+    encontradas na web são de uso pessoal / licença não clara), então o
+    --ff-display abaixo usa Anton como substituta visual (bold, larga,
+    grande impacto) até você me enviar os arquivos .woff2 da Horizon.
+    Para ativá-la de verdade, descomente o bloco @font-face logo abaixo,
+    aponte para os arquivos e troque 'Anton' por 'Horizon' no :root.
+  */
+  /*
+  @font-face{
+    font-family:'Horizon';
+    src:url('assets/fonts/Horizon.woff2') format('woff2');
+    font-weight:400;
+    font-display:swap;
+  }
+  */
+
+  :root{
+    --ink:#0a0a0b;
+    --panel:#141416;
+    --panel-2:#1a1a1d;
+    --line:rgba(245,245,240,.14);
+    --text:#f5f5f0;
+    --muted:#9a9a95;
+    --yellow:#ffe500;
+    --yellow-dim:#7a7000;
+    --radius:14px;
+    --wrap:1180px;
+    --ff-display:'Anton', 'Horizon', Impact, sans-serif;
+    --ff-body:'Oswald', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--ff-body);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  ::selection{background:var(--yellow); color:var(--ink);}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 24px;}
+
+  h1,h2,h3{font-family:var(--ff-display); letter-spacing:.01em; text-transform:uppercase; line-height:1.02; font-weight:400;}
+
+  .eyebrow{
+    font-family:var(--ff-body);
+    font-weight:600;
+    font-size:12.5px;
+    letter-spacing:.2em;
+    color:var(--yellow);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+    text-transform:uppercase;
+  }
+  .eyebrow::before{
+    content:'';
+    width:16px; height:2px;
+    background:var(--yellow);
+  }
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,10,11,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 24px;
+    max-width:var(--wrap); margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{
+    height:38px; width:auto;
+    transition:transform .9s cubic-bezier(.2,.6,.15,1);
+  }
+  .brand:hover img{transform:rotate(360deg);}
+  @media (prefers-reduced-motion: reduce){
+    .brand img{transition:none;}
+  }
+
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{
+    font-size:13px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted);
+    font-weight:500;
+    position:relative;
+    padding:4px 0;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--yellow); transition:width .25s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{width:100%;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--ff-body);
+    font-weight:600;
+    font-size:13px; letter-spacing:.05em; text-transform:uppercase;
+    padding:12px 22px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .btn-yellow{background:var(--yellow); color:#161200; border-color:var(--yellow); font-weight:700;}
+  .btn-yellow:hover{background:#fff04d;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text);}
+
+  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px;}
+  .burger span{width:22px; height:2px; background:var(--text);}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex; align-items:flex-end;
+    padding:150px 0 90px;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-video{
+    position:absolute; inset:0; z-index:-2;
+    width:100%; height:100%; object-fit:cover;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0; z-index:-1;
+    background:
+      linear-gradient(180deg, rgba(10,10,11,.55) 0%, rgba(10,10,11,.35) 35%, rgba(10,10,11,.92) 100%);
+  }
+  .hero-inner{
+    position:relative; z-index:1;
+    max-width:760px;
+  }
+  .hero h1{
+    font-size:clamp(48px, 8vw, 100px);
+    color:var(--text);
+  }
+  .hero h1 .accent{color:var(--yellow);}
+  .hero p.lede{
+    font-size:18px; color:#dcdcd6; font-weight:300;
+    max-width:52ch;
+    margin:22px 0 30px;
+  }
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px;}
+  .hero-tags{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:34px;
+  }
+  .hero-tags span{
+    font-size:11px; letter-spacing:.1em; font-weight:600;
+    color:#e8e8e2;
+    border:1px solid rgba(245,245,240,.28);
+    padding:6px 12px; border-radius:999px;
+    text-transform:uppercase;
+    background:rgba(10,10,11,.35);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  /* ===== SECTION SHELL ===== */
+  section{padding:120px 0;}
+  .section-head{
+    max-width:640px;
+    margin-bottom:56px;
+  }
+  .section-head h2{font-size:clamp(34px,4.4vw,52px);}
+  .section-head p{color:var(--muted); font-size:16px; margin-top:16px; font-weight:300;}
+
+  #servicos{border-top:1px solid var(--line);}
+
+  /* ===== SERVICES ===== */
+  .svc-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .svc-card{
+    background:var(--panel);
+    padding:34px 26px;
+    position:relative;
+    min-height:250px;
+    display:flex; flex-direction:column;
+  }
+  .svc-card .frame{position:absolute; inset:14px; pointer-events:none;}
+  .svc-card .frame i{position:absolute; width:14px; height:14px; border-color:var(--yellow-dim); opacity:.7;}
+  .svc-card .frame i:nth-child(1){top:0; left:0; border-top:1px solid; border-left:1px solid;}
+  .svc-card .frame i:nth-child(2){top:0; right:0; border-top:1px solid; border-right:1px solid;}
+  .svc-card .frame i:nth-child(3){bottom:0; left:0; border-bottom:1px solid; border-left:1px solid;}
+  .svc-card .frame i:nth-child(4){bottom:0; right:0; border-bottom:1px solid; border-right:1px solid;}
+  .svc-card:hover .frame i{border-color:var(--yellow);}
+  .svc-num{font-size:12px; letter-spacing:.14em; font-weight:600; color:var(--yellow);}
+  .svc-card h3{font-size:24px; margin:14px 0 12px; font-family:var(--ff-body); text-transform:none; font-weight:600; letter-spacing:0;}
+  .svc-card p{color:var(--muted); font-size:14.5px; flex:1; font-weight:300;}
+
+  /* ===== TOUR 360 ===== */
+  #tour{background:var(--panel-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .tour-frame{
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    overflow:hidden;
+    background:#000;
+    position:relative;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.6);
+  }
+  .tour-frame iframe{
+    width:100%; height:560px; border:0; display:block;
+  }
+  .tour-bar{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;
+    margin-top:22px;
+  }
+  .tour-locations{display:flex; flex-wrap:wrap; gap:10px;}
+  .tour-locations span{
+    font-size:12px; color:var(--muted); font-weight:400;
+    border:1px solid var(--line); padding:8px 14px; border-radius:999px;
+  }
+  .tour-hint{color:var(--muted); font-size:14px; font-weight:300;}
+
+  /* ===== TRABALHOS (videos) ===== */
+  #trabalhos{border-top:1px solid var(--line);}
+  .work-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .work-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .work-card video{
+    width:100%; aspect-ratio:16/9; display:block; background:#000;
+  }
+  .work-meta{padding:22px 24px 26px;}
+  .work-tag{font-size:11.5px; letter-spacing:.14em; font-weight:600; color:var(--yellow); text-transform:uppercase;}
+  .work-card h3{font-family:var(--ff-body); text-transform:none; font-weight:600; font-size:21px; letter-spacing:0; margin:8px 0 8px;}
+  .work-card p{color:var(--muted); font-size:14.5px; font-weight:300;}
+
+  /* ===== SOBRE / COBERTURA ===== */
+  #sobre{border-top:1px solid var(--line);}
+  .sobre-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;
+  }
+  .sobre-grid p{color:var(--muted); font-size:16.5px; margin-bottom:18px; font-weight:300;}
+  .sobre-grid p strong{color:var(--text); font-weight:600;}
+  .step-list{display:flex; flex-direction:column; gap:0;}
+  .step-list li{
+    display:flex; align-items:baseline; gap:18px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .step-list li:first-child{border-top:1px solid var(--line);}
+  .step-list .snum{font-family:var(--ff-display); color:var(--yellow); font-size:22px; width:40px; flex-shrink:0;}
+  .step-list h4{font-family:var(--ff-body); font-weight:600; font-size:16px; margin-bottom:4px; text-transform:none;}
+  .step-list p{color:var(--muted); font-size:14px; margin:0; font-weight:300;}
+
+  /* ===== INSTAGRAM ===== */
+  #instagram{background:var(--panel-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .insta-wrap{
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;
+  }
+  .insta-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .insta-handle{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .insta-avatar{
+    width:52px; height:52px; border-radius:50%;
+    background:var(--yellow);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--ff-display); font-size:20px; color:#161200;
+    flex-shrink:0;
+  }
+  .insta-handle .h{font-weight:600; font-size:16px;}
+  .insta-handle .s{color:var(--muted); font-size:13px; font-weight:300;}
+  .insta-card p{color:var(--muted); font-size:14.5px; margin-bottom:22px; font-weight:300;}
+  .insta-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  }
+  .insta-tile{
+    aspect-ratio:1/1; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px;
+    border:1px solid var(--line);
+    background:linear-gradient(135deg, var(--panel-2), #0f0f10);
+  }
+
+  /* ===== CONTATO ===== */
+  #contato{padding-bottom:60px;}
+  .contato-panel{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:clamp(36px,6vw,72px);
+    background:radial-gradient(circle at 20% 20%, rgba(255,229,0,.08), transparent 55%), var(--panel);
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:40px;
+    align-items:center;
+  }
+  .contato-panel h2{font-size:clamp(32px,4.6vw,50px);}
+  .contato-panel p{color:var(--muted); margin:16px 0 26px; max-width:44ch; font-weight:300;}
+  .contato-list{display:flex; flex-direction:column; gap:16px;}
+  .contato-list li{display:flex; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:14px;}
+  .contato-list .k{color:var(--muted); font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-weight:500;}
+  .contato-list .v{font-weight:500; font-size:15px;}
+  .contato-list .v a:hover{color:var(--yellow);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0;
+  }
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+  }
+  .foot-row .f-left{display:flex; align-items:center; gap:12px; color:var(--muted); font-size:13px; font-weight:300;}
+  .foot-row .f-left img{
+    height:22px; width:auto;
+    transition:transform .9s cubic-bezier(.2,.6,.15,1);
+  }
+  .foot-row .f-left:hover img{transform:rotate(360deg);}
+  .foot-row .f-right{font-size:12px; color:var(--yellow); letter-spacing:.08em; font-weight:600; text-transform:uppercase;}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:920px){
+    .svc-grid{grid-template-columns:repeat(2,1fr);}
+    .sobre-grid{grid-template-columns:1fr;}
+    .insta-wrap{grid-template-columns:1fr;}
+    .contato-panel{grid-template-columns:1fr;}
+    .work-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .burger{display:flex;}
+  }
+  @media (max-width:920px){
+    header.open .nav-links{
+      display:flex; position:absolute; top:100%; left:0; right:0;
+      background:var(--ink); flex-direction:column; align-items:flex-start;
+      padding:20px 24px 26px; border-bottom:1px solid var(--line); gap:18px;
+    }
+  }
+  @media (max-width:600px){
+    .svc-grid{grid-template-columns:1fr;}
+    .insta-grid{grid-template-columns:repeat(4,1fr);}
+    .tour-frame iframe{height:420px;}
+    .btn{font-size:12px; padding:11px 16px;}
+    .hero{align-items:flex-end; padding-bottom:60px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="brand">
+      <img src="assets/logo_giro.png" alt="Giro Mídia">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#tour">Tour 360°</a></li>
+      <li><a href="#trabalhos">Trabalhos</a></li>
+      <li><a href="#sobre">Cobertura</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-yellow" href="https://wa.me/554999467951" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="burger" id="burgerBtn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="assets/capa_poster.jpg">
+      <source src="assets/capa_hero.mp4" type="video/mp4">
+    </video>
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Francisco Beltrão — PR</div>
+      <h1>Ver de cima,<br>muda <span class="accent">tudo.</span></h1>
+      <p class="lede">Fotografia, vídeo, drone e tours virtuais em 360° para negócios, imóveis e eventos em Francisco Beltrão e região.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-yellow" href="#tour">Ver tour 360°</a>
+        <a class="btn btn-ghost" href="#trabalhos">Ver trabalhos</a>
+        <a class="btn btn-ghost" href="https://wa.me/554999467951" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+      <div class="hero-tags">
+        <span>Fotografia</span>
+        <span>Vídeo &amp; Drone</span>
+        <span>Tour Virtual 360°</span>
+        <span>Cobertura de Eventos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICOS -->
+  <section id="servicos">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Serviços</div>
+        <h2>Quatro formas de mostrar o seu espaço.</h2>
+        <p>Cada projeto começa com o mesmo giro pelo local — o que muda é o formato de entrega.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="frame"><i></i><i></i><i></i><i></i></div>
+          <div class="svc-num">Foto</div>
+          <h3>Fotografia</h3>
+          <p>Imagens profissionais de fachadas, produtos, imóveis e eventos, com tratamento de cor e entrega rápida em alta resolução.</p>
+        </div>
+        <div class="svc-card">
+          <div class="frame"><i></i><i></i><i></i><i></i></div>
+          <div class="svc-num">Vídeo</div>
+          <h3>Vídeo &amp; Drone</h3>
+          <p>Vídeos institucionais e aéreos, do roteiro à edição final, prontos para redes sociais, site ou apresentações.</p>
+        </div>
+        <div class="svc-card">
+          <div class="frame"><i></i><i></i><i></i><i></i></div>
+          <div class="svc-num">360°</div>
+          <h3>Tour Virtual 360°</h3>
+          <p>Passeios imersivos e navegáveis para comércios, imóveis e espaços públicos — o visitante explora como se estivesse no local.</p>
+        </div>
+        <div class="svc-card">
+          <div class="frame"><i></i><i></i><i></i><i></i></div>
+          <div class="svc-num">Eventos</div>
+          <h3>Cobertura de Eventos</h3>
+          <p>Registro completo de eventos corporativos e sociais, com edição ágil para publicação ainda no calor do momento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOUR 360 -->
+  <section id="tour">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Tour Virtual 360°</div>
+        <h2>Arraste. Gire. Explore.</h2>
+        <p>Um exemplo real de acesso 360° produzido pela Giro Mídia. Clique e arraste dentro da janela para olhar em qualquer direção.</p>
+      </div>
+      <div class="tour-frame">
+        <iframe src="https://kreftav.github.io/panoramas/" title="Tour virtual 360° — Giro Mídia" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
+      </div>
+      <div class="tour-bar">
+        <div class="tour-locations">
+          <span>Centro Claro FB</span>
+          <span>Beltrão Noite</span>
+          <span>Onda Sul</span>
+          <span>Centro FB</span>
+        </div>
+        <a class="btn btn-ghost" href="https://kreftav.github.io/panoramas/" target="_blank" rel="noopener">Abrir em tela cheia ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRABALHOS -->
+  <section id="trabalhos">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Trabalhos</div>
+        <h2>Projetos recentes.</h2>
+        <p>Vídeos produzidos pela Giro Mídia para diferentes setores da região.</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-card">
+          <video controls preload="metadata" poster="assets/agro_poster.jpg">
+            <source src="assets/agro_web.mp4" type="video/mp4">
+          </video>
+          <div class="work-meta">
+            <div class="work-tag">Agronegócio</div>
+            <h3>Cobertura aérea rural</h3>
+            <p>Imagens de drone e vídeo institucional para o setor do agronegócio da região.</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <video controls preload="metadata" poster="assets/turismo_poster.jpg">
+            <source src="assets/turismo_web.mp4" type="video/mp4">
+          </video>
+          <div class="work-meta">
+            <div class="work-tag">Turismo</div>
+            <h3>Roteiro turístico em vídeo</h3>
+            <p>Produção audiovisual destacando pontos turísticos e paisagens de Francisco Beltrão e região.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE / COBERTURA -->
+  <section id="sobre">
+    <div class="wrap sobre-grid">
+      <div>
+        <div class="eyebrow">Cobertura</div>
+        <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:22px;">Rodando Francisco<br>Beltrão e região.</h2>
+        <p>A <strong>Giro Mídia</strong> nasceu para dar uma volta completa em cada projeto: entender o espaço, planejar os ângulos e entregar o material certo para cada canal — do feed do Instagram ao tour 360° incorporado num site.</p>
+        <p>Trabalhamos com comércios, imobiliárias, eventos e instituições que querem mostrar seus espaços com qualidade profissional, sem depender de fotos amadoras ou vídeos genéricos.</p>
+        <p>Cada projeto passa pelo mesmo giro: visita técnica, captação, tratamento de imagem e entrega — sempre pensando em como o resultado vai ser usado.</p>
+      </div>
+      <ul class="step-list">
+        <li>
+          <span class="snum">1</span>
+          <div>
+            <h4>Planejamento</h4>
+            <p>Visita ao local, definição de ângulos e roteiro de captação.</p>
+          </div>
+        </li>
+        <li>
+          <span class="snum">2</span>
+          <div>
+            <h4>Captação</h4>
+            <p>Foto, vídeo, drone ou escaneamento 360°, conforme o projeto.</p>
+          </div>
+        </li>
+        <li>
+          <span class="snum">3</span>
+          <div>
+            <h4>Edição</h4>
+            <p>Tratamento de cor, corte de vídeo e montagem do tour virtual.</p>
+          </div>
+        </li>
+        <li>
+          <span class="snum">4</span>
+          <div>
+            <h4>Entrega</h4>
+            <p>Arquivos prontos para redes sociais, site ou apresentação comercial.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section id="instagram">
+    <div class="wrap insta-wrap">
+      <div class="insta-card">
+        <div class="insta-handle">
+          <div class="insta-avatar">G</div>
+          <div>
+            <div class="h">@giro_midia_</div>
+            <div class="s">Fotografia · Vídeo · Tours 360°</div>
+          </div>
+        </div>
+        <p>Bastidores dos projetos, tours 360° e entregas recentes da Giro Mídia em Francisco Beltrão. Acompanhe pelo Instagram para ver o giro completo de cada trabalho.</p>
+        <a class="btn btn-yellow" href="https://www.instagram.com/giro_midia_/" target="_blank" rel="noopener">Seguir no Instagram ↗</a>
+      </div>
+      <div class="insta-grid" aria-hidden="true">
+        <div class="insta-tile">📷</div>
+        <div class="insta-tile">🎥</div>
+        <div class="insta-tile">🛰️</div>
+        <div class="insta-tile">🔄</div>
+        <div class="insta-tile">🏙️</div>
+        <div class="insta-tile">🎬</div>
+        <div class="insta-tile">🌆</div>
+        <div class="insta-tile">📍</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="contato-panel">
+        <div>
+          <div class="eyebrow">Contato</div>
+          <h2>Bora fechar o giro?</h2>
+          <p>Conta pra gente o que você precisa registrar — a resposta mais rápida é sempre pelo WhatsApp.</p>
+          <a class="btn btn-yellow" href="https://wa.me/554999467951" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        </div>
+        <ul class="contato-list">
+          <li>
+            <span class="k">WhatsApp</span>
+            <span class="v"><a href="https://wa.me/554999467951" target="_blank" rel="noopener">(49) 99946-7951</a></span>
+          </li>
+          <li>
+            <span class="k">Instagram</span>
+            <span class="v"><a href="https://www.instagram.com/giro_midia_/" target="_blank" rel="noopener">@giro_midia_</a></span>
+          </li>
+          <li>
+            <span class="k">Região</span>
+            <span class="v">Francisco Beltrão — PR</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="f-left">
+      <img src="assets/logo_giro.png" alt="Giro Mídia">
+      <span>© 2025 Giro Mídia · Francisco Beltrão, PR</span>
+    </div>
+    <div class="f-right">Ver de cima, muda tudo</div>
+  </div>
+</footer>
+
+<script>
+  var header = document.getElementById('siteHeader');
+  var burger = document.getElementById('burgerBtn');
+  burger.addEventListener('click', function(){
+    var isOpen = header.classList.toggle('open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.addEventListener('click', function(){
+      header.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    });
+  });
+</script>
+
+</body>
+</html>
