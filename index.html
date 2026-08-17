@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giro Mídia — Ver de cima, muda tudo</title>
-<meta name="description" content="Giro Mídia: fotografia, vídeo, drone e tours virtuais 360° em Francisco Beltrão e região. Ver de cima, muda tudo.">
+<title>Giro Mídia — Ver de cima muda tudo</title>
+<meta name="description" content="Giro Mídia: fotografia, vídeo, drone e tours virtuais 360° em Francisco Beltrão e região. Ver de cima muda tudo.">
 <link rel="icon" href="assets/logo_giro.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +59,7 @@
   ul{list-style:none;}
   ::selection{background:var(--yellow); color:var(--ink);}
 
-  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 24px;}
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 24px; position:relative; z-index:1;}
 
   h1,h2,h3{font-family:var(--ff-display); letter-spacing:.01em; text-transform:uppercase; line-height:1.02; font-weight:400;}
 
@@ -89,29 +89,32 @@
     border-bottom:1px solid var(--line);
   }
   nav{
-    display:flex; align-items:center; justify-content:space-between;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
     padding:12px 24px;
     max-width:var(--wrap); margin:0 auto;
   }
   .brand{
-    display:flex; align-items:center; gap:10px;
     position:relative;
-    min-width:158px;
+    display:block;
+    justify-self:start;
+    height:38px; /* mantém a faixa do cabeçalho do tamanho de um logo de 38px */
   }
   .brand img{
-    height:158px; width:auto;
     position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    transform-origin:center center;
+    top:50%; left:0;
+    height:150px; width:auto;
+    transform:translateY(-50%) rotate(0deg);
     transition:transform .9s cubic-bezier(.2,.6,.15,1);
+    z-index:2;
   }
   .brand:hover img{transform:translateY(-50%) rotate(360deg);}
   @media (prefers-reduced-motion: reduce){
     .brand img{transition:none;}
   }
 
-  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links{display:flex; align-items:center; justify-self:center; gap:34px;}
   .nav-links a{
     font-size:13px; letter-spacing:.06em; text-transform:uppercase;
     color:var(--muted);
@@ -141,7 +144,7 @@
   .btn-ghost{color:var(--text);}
   .btn-ghost:hover{border-color:var(--text);}
 
-  .nav-cta{display:flex; align-items:center; gap:14px;}
+  .nav-cta{display:flex; align-items:center; justify-self:end; gap:14px;}
   .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px;}
   .burger span{width:22px; height:2px; background:var(--text);}
 
@@ -205,7 +208,23 @@
   .section-head h2{font-size:clamp(34px,4.4vw,52px);}
   .section-head p{color:var(--muted); font-size:16px; margin-top:16px; font-weight:300;}
 
-  #servicos{border-top:1px solid var(--line);}
+  #servicos{border-top:1px solid var(--line); position:relative; overflow:hidden;}
+
+  /* ===== GLOWS decorativos (degradê discreto) ===== */
+  .glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.16;
+    pointer-events:none;
+    z-index:0;
+  }
+  .glow-yellow{background:radial-gradient(circle, var(--yellow), transparent 70%);}
+  .glow-amber{background:radial-gradient(circle, #ffb020, transparent 70%);}
+  .glow-tl{top:-160px; left:-140px; width:420px; height:420px;}
+  .glow-tr{top:-160px; right:-140px; width:420px; height:420px;}
+  .glow-br{bottom:-180px; right:-140px; width:480px; height:480px;}
+  .glow-bl{bottom:-180px; left:-140px; width:480px; height:480px;}
 
   /* ===== SERVICES ===== */
   .svc-grid{
@@ -247,26 +266,47 @@
   }
   .tour-frame iframe{
     width:100%; height:560px; border:0; display:block;
+    pointer-events:none;
   }
+  .tour-frame.active iframe{pointer-events:auto;}
+  .tour-veil{
+    position:absolute; inset:0; z-index:2;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(10,10,11,.32);
+    cursor:pointer;
+    transition:opacity .3s ease;
+  }
+  .tour-veil span{
+    background:rgba(10,10,11,.78); border:1px solid var(--line); color:var(--text);
+    padding:12px 22px; border-radius:999px;
+    font-size:13px; letter-spacing:.05em; text-transform:uppercase; font-weight:600;
+  }
+  .tour-frame.active .tour-veil{opacity:0; pointer-events:none;}
   .tour-bar{
     display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px;
     margin-top:22px;
   }
-  .tour-locations{display:flex; flex-wrap:wrap; gap:10px;}
-  .tour-locations span{
-    font-size:12px; color:var(--muted); font-weight:400;
-    border:1px solid var(--line); padding:8px 14px; border-radius:999px;
-  }
   .tour-hint{color:var(--muted); font-size:14px; font-weight:300;}
 
-  /* ===== TRABALHOS (videos) ===== */
-  #trabalhos{border-top:1px solid var(--line);}
-  .work-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
+  /* ===== TRABALHOS (carrossel de vídeos) ===== */
+  #trabalhos{border-top:1px solid var(--line); position:relative; overflow:hidden;}
+  .carousel-wrap{position:relative;}
+  .work-carousel{
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:24px;
+    padding-bottom:14px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color:var(--yellow-dim) transparent;
   }
+  .work-carousel::-webkit-scrollbar{height:6px;}
+  .work-carousel::-webkit-scrollbar-thumb{background:var(--yellow-dim); border-radius:999px;}
   .work-card{
+    flex:0 0 clamp(280px, 32vw, 380px);
+    scroll-snap-align:start;
     background:var(--panel);
     border:1px solid var(--line);
     border-radius:var(--radius);
@@ -279,9 +319,21 @@
   .work-tag{font-size:11.5px; letter-spacing:.14em; font-weight:600; color:var(--yellow); text-transform:uppercase;}
   .work-card h3{font-family:var(--ff-body); text-transform:none; font-weight:600; font-size:21px; letter-spacing:0; margin:8px 0 8px;}
   .work-card p{color:var(--muted); font-size:14.5px; font-weight:300;}
+  .car-btn{
+    position:absolute; top:40%; translate:0 -50%;
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(10,10,11,.8); border:1px solid var(--line); color:var(--text);
+    font-size:20px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    z-index:3;
+  }
+  .car-btn:hover{border-color:var(--yellow); color:var(--yellow);}
+  .car-prev{left:-6px;}
+  .car-next{right:-6px;}
+  @media (max-width:600px){ .car-btn{display:none;} }
 
   /* ===== SOBRE / COBERTURA ===== */
-  #sobre{border-top:1px solid var(--line);}
+  #sobre{border-top:1px solid var(--line); position:relative; overflow:hidden;}
   .sobre-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;
   }
@@ -299,7 +351,7 @@
   .step-list p{color:var(--muted); font-size:14px; margin:0; font-weight:300;}
 
   /* ===== INSTAGRAM ===== */
-  #instagram{background:var(--panel-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  #instagram{background:var(--panel-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); position:relative; overflow:hidden;}
   .insta-wrap{
     display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;
   }
@@ -351,15 +403,19 @@
   .contato-list .v{font-weight:500; font-size:15px;}
   .contato-list .v a:hover{color:var(--yellow);}
 
-  <footer>
-    <div class="wrap foot-row">
-      <div class="f-left">
-        <img src="assets/logo_giro.png" alt="Giro Mídia">
-        <span>© 2025 Giro Mídia · Francisco Beltrão, PR</span>
-      </div>
-      <div class="f-right">Ver de cima, muda tudo</div>
-    </div>
-  </footer>
+  footer{
+    border-top:1px solid var(--line);
+    padding:44px 0;
+  }
+  .foot-simple{
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+    text-align:center; color:var(--muted); font-size:13px; font-weight:300;
+  }
+  .foot-logo img{
+    height:34px; width:auto;
+    transition:transform .9s cubic-bezier(.2,.6,.15,1);
+  }
+  .foot-logo:hover img{transform:rotate(360deg);}
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:920px){
@@ -367,7 +423,6 @@
     .sobre-grid{grid-template-columns:1fr;}
     .insta-wrap{grid-template-columns:1fr;}
     .contato-panel{grid-template-columns:1fr;}
-    .work-grid{grid-template-columns:1fr;}
     .nav-links{display:none;}
     .burger{display:flex;}
   }
@@ -402,7 +457,7 @@
       <li><a href="#contato">Contato</a></li>
     </ul>
     <div class="nav-cta">
-      <a class="btn btn-yellow" href="https://wa.me/554999467951" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-yellow" href="https://wa.me/5546999711954" target="_blank" rel="noopener">WhatsApp</a>
       <button class="burger" id="burgerBtn" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -419,12 +474,12 @@
     </video>
     <div class="wrap hero-inner">
       <div class="eyebrow">Francisco Beltrão — PR</div>
-      <h1>Ver de cima,<br>muda <span class="accent">tudo.</span></h1>
+      <h1>Ver de cima<br>muda <span class="accent">tudo</span></h1>
       <p class="lede">Fotografia, vídeo, drone e tours virtuais em 360° para negócios, imóveis e eventos em Francisco Beltrão e região.</p>
       <div class="hero-ctas">
         <a class="btn btn-yellow" href="#tour">Ver tour 360°</a>
         <a class="btn btn-ghost" href="#trabalhos">Ver trabalhos</a>
-        <a class="btn btn-ghost" href="https://wa.me/554999467951" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        <a class="btn btn-ghost" href="https://wa.me/5546999711954" target="_blank" rel="noopener">Falar no WhatsApp</a>
       </div>
       <div class="hero-tags">
         <span>Fotografia</span>
@@ -437,11 +492,12 @@
 
   <!-- SERVICOS -->
   <section id="servicos">
+    <div class="glow glow-yellow glow-tl" aria-hidden="true"></div>
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Serviços</div>
-        <h2>Quatro formas de mostrar o seu espaço.</h2>
-        <p>Cada projeto começa com o mesmo giro pelo local — o que muda é o formato de entrega.</p>
+        <h2>Qualidade profissional em cada entrega.</h2>
+        <p>Da fotografia ao tour 360°, todo trabalho da Giro Mídia passa pelo mesmo cuidado técnico e visual — feito para representar bem a sua marca, do primeiro clique à entrega final.</p>
       </div>
       <div class="svc-grid">
         <div class="svc-card">
@@ -480,16 +536,14 @@
         <h2>Arraste. Gire. Explore.</h2>
         <p>Um exemplo real de acesso 360° produzido pela Giro Mídia. Clique e arraste dentro da janela para olhar em qualquer direção.</p>
       </div>
-      <div class="tour-frame">
+      <div class="tour-frame" id="tourFrame">
         <iframe src="https://kreftav.github.io/panoramas/" title="Tour virtual 360° — Giro Mídia" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
+        <div class="tour-veil" id="tourVeil" role="button" tabindex="0">
+          <span>Clique para interagir com o tour 360°</span>
+        </div>
       </div>
       <div class="tour-bar">
-        <div class="tour-locations">
-          <span>Centro Claro FB</span>
-          <span>Beltrão Noite</span>
-          <span>Onda Sul</span>
-          <span>Centro FB</span>
-        </div>
+        <span class="tour-hint">Ao tirar o mouse do tour, a rolagem da página volta ao normal.</span>
         <a class="btn btn-ghost" href="https://kreftav.github.io/panoramas/" target="_blank" rel="noopener">Abrir em tela cheia ↗</a>
       </div>
     </div>
@@ -497,53 +551,76 @@
 
   <!-- TRABALHOS -->
   <section id="trabalhos">
+    <div class="glow glow-amber glow-br" aria-hidden="true"></div>
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Trabalhos</div>
         <h2>Projetos recentes.</h2>
         <p>Vídeos produzidos pela Giro Mídia para diferentes setores da região.</p>
       </div>
-      <div class="work-grid">
-        <div class="work-card">
-          <video controls preload="metadata" poster="assets/agro_poster.jpg">
-            <source src="assets/agro_web.mp4" type="video/mp4">
-          </video>
-          <div class="work-meta">
-            <div class="work-tag">Agronegócio</div>
-            <h3>Cobertura aérea rural</h3>
-            <p>Imagens de drone e vídeo institucional para o setor do agronegócio da região.</p>
+      <div class="carousel-wrap">
+        <button class="car-btn car-prev" id="carPrev" aria-label="Projeto anterior">‹</button>
+        <div class="work-carousel" id="workCarousel">
+          <div class="work-card">
+            <video controls preload="metadata" poster="assets/agro_poster.jpg">
+              <source src="assets/agro_web.mp4" type="video/mp4">
+            </video>
+            <div class="work-meta">
+              <div class="work-tag">Agronegócio</div>
+              <h3>Cobertura aérea rural</h3>
+              <p>Imagens de drone e vídeo institucional para o setor do agronegócio da região.</p>
+            </div>
           </div>
-        </div>
-        <div class="work-card">
-          <video controls preload="metadata" poster="assets/turismo_poster.jpg">
-            <source src="assets/turismo_web.mp4" type="video/mp4">
-          </video>
-          <div class="work-meta">
-            <div class="work-tag">Turismo</div>
-            <h3>Roteiro turístico em vídeo</h3>
-            <p>Produção audiovisual destacando pontos turísticos e paisagens de Francisco Beltrão e região.</p>
+          <div class="work-card">
+            <video controls preload="metadata" poster="assets/turismo_poster.jpg">
+              <source src="assets/turismo_web.mp4" type="video/mp4">
+            </video>
+            <div class="work-meta">
+              <div class="work-tag">Turismo</div>
+              <h3>Roteiro turístico em vídeo</h3>
+              <p>Produção audiovisual destacando pontos turísticos e paisagens de Francisco Beltrão e região.</p>
+            </div>
           </div>
+
+          <!--
+            Para adicionar um novo projeto, copie o bloco abaixo, troque o
+            vídeo/poster/textos e cole aqui dentro do mesmo .work-carousel.
+            O carrossel comporta até uns 12 projetos sem precisar mexer no CSS.
+
+          <div class="work-card">
+            <video controls preload="metadata" poster="assets/novo_poster.jpg">
+              <source src="assets/novo_web.mp4" type="video/mp4">
+            </video>
+            <div class="work-meta">
+              <div class="work-tag">Categoria</div>
+              <h3>Título do projeto</h3>
+              <p>Descrição curta do projeto.</p>
+            </div>
+          </div>
+          -->
         </div>
+        <button class="car-btn car-next" id="carNext" aria-label="Próximo projeto">›</button>
       </div>
     </div>
   </section>
 
   <!-- SOBRE / COBERTURA -->
   <section id="sobre">
+    <div class="glow glow-yellow glow-tr" aria-hidden="true"></div>
     <div class="wrap sobre-grid">
       <div>
         <div class="eyebrow">Cobertura</div>
-        <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:22px;">Rodando Francisco<br>Beltrão e região.</h2>
-        <p>A <strong>Giro Mídia</strong> nasceu para dar uma volta completa em cada projeto: entender o espaço, planejar os ângulos e entregar o material certo para cada canal — do feed do Instagram ao tour 360° incorporado num site.</p>
-        <p>Trabalhamos com comércios, imobiliárias, eventos e instituições que querem mostrar seus espaços com qualidade profissional, sem depender de fotos amadoras ou vídeos genéricos.</p>
-        <p>Cada projeto passa pelo mesmo giro: visita técnica, captação, tratamento de imagem e entrega — sempre pensando em como o resultado vai ser usado.</p>
+        <h2 style="font-size:clamp(32px,4vw,46px); margin-bottom:22px;">Do briefing à<br>entrega final.</h2>
+        <p>A <strong>Giro Mídia</strong> atende Francisco Beltrão e região com um processo pensado para cada detalhe fazer sentido: entender o que o cliente precisa mostrar, planejar os ângulos certos e entregar um material pronto para uso imediato.</p>
+        <p>Atendemos comércios, imobiliárias, produtores rurais, eventos e instituições que querem se apresentar com qualidade profissional, sem depender de imagens amadoras ou conteúdo genérico.</p>
+        <p>Cada trabalho segue o mesmo padrão de cuidado, do primeiro contato à entrega dos arquivos finais — sempre pensando em como o resultado vai ser usado.</p>
       </div>
       <ul class="step-list">
         <li>
           <span class="snum">1</span>
           <div>
             <h4>Planejamento</h4>
-            <p>Visita ao local, definição de ângulos e roteiro de captação.</p>
+            <p>Alinhamento do briefing e definição dos ângulos e do roteiro de captação.</p>
           </div>
         </li>
         <li>
@@ -573,6 +650,7 @@
 
   <!-- INSTAGRAM -->
   <section id="instagram">
+    <div class="glow glow-amber glow-bl" aria-hidden="true"></div>
     <div class="wrap insta-wrap">
       <div class="insta-card">
         <div class="insta-handle">
@@ -606,12 +684,12 @@
           <div class="eyebrow">Contato</div>
           <h2>Bora fechar o giro?</h2>
           <p>Conta pra gente o que você precisa registrar — a resposta mais rápida é sempre pelo WhatsApp.</p>
-          <a class="btn btn-yellow" href="https://wa.me/554999467951" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          <a class="btn btn-yellow" href="https://wa.me/5546999711954" target="_blank" rel="noopener">Chamar no WhatsApp</a>
         </div>
         <ul class="contato-list">
           <li>
             <span class="k">WhatsApp</span>
-            <span class="v"><a href="https://wa.me/554999467951" target="_blank" rel="noopener">(49) 99946-7951</a></span>
+            <span class="v"><a href="https://wa.me/5546999711954" target="_blank" rel="noopener">(46) 99971-1954</a></span>
           </li>
           <li>
             <span class="k">Instagram</span>
@@ -629,12 +707,11 @@
 </main>
 
 <footer>
-  <div class="wrap foot-row">
-    <div class="f-left">
+  <div class="wrap foot-simple">
+    <a href="#top" class="foot-logo">
       <img src="assets/logo_giro.png" alt="Giro Mídia">
-      <span>© 2025 Giro Mídia · Francisco Beltrão, PR</span>
-    </div>
-    <div class="f-right">Ver de cima, muda tudo</div>
+    </a>
+    <span>© 2025 Giro Mídia · Francisco Beltrão, PR — Todos os direitos reservados.</span>
   </div>
 </footer>
 
@@ -651,6 +728,36 @@
       burger.setAttribute('aria-expanded','false');
     });
   });
+
+  // Tour 360°: só entrega o scroll do mouse pro iframe depois de um clique,
+  // e devolve o controle pra página assim que o mouse sai da área.
+  var tourFrame = document.getElementById('tourFrame');
+  var tourVeil = document.getElementById('tourVeil');
+  if (tourFrame && tourVeil){
+    tourVeil.addEventListener('click', function(){
+      tourFrame.classList.add('active');
+    });
+    tourVeil.addEventListener('keypress', function(e){
+      if (e.key === 'Enter' || e.key === ' ') tourFrame.classList.add('active');
+    });
+    tourFrame.addEventListener('mouseleave', function(){
+      tourFrame.classList.remove('active');
+    });
+  }
+
+  // Carrossel de trabalhos
+  var carousel = document.getElementById('workCarousel');
+  var carPrev = document.getElementById('carPrev');
+  var carNext = document.getElementById('carNext');
+  if (carousel && carPrev && carNext){
+    var scrollByCard = function(dir){
+      var card = carousel.querySelector('.work-card');
+      var step = card ? card.getBoundingClientRect().width + 24 : 340;
+      carousel.scrollBy({ left: dir * step, behavior: 'smooth' });
+    };
+    carPrev.addEventListener('click', function(){ scrollByCard(-1); });
+    carNext.addEventListener('click', function(){ scrollByCard(1); });
+  }
 </script>
 
 </body>
