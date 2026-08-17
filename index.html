@@ -115,17 +115,30 @@
     justify-self:start;
     height:38px; /* mantém a faixa do cabeçalho do tamanho de um logo de 38px */
   }
-  .brand img{
-    position:absolute;
-    top:50%; left:0;
-    height:150px; width:auto;
-    transform:translateY(-50%) rotate(0deg);
-    transition:transform .9s cubic-bezier(.2,.6,.15,1);
-    z-index:2;
+  .brand{
+    position: relative;
+    display: block;
+    justify-self: start;
+    height: 38px;
+    width: 38px; /* define uma largura mínima para o pai não colapsar */
   }
-  .brand:hover img{transform:translateY(-50%) rotate(360deg);}
+  .brand img{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 150px;
+    width: auto;
+    max-width: none; /* impede o CSS global de forçar a largura para 0 */
+    transform: translateY(-50%) rotate(0deg);
+    transform-origin: center center; /* garante o giro no próprio eixo */
+    transition: transform .9s cubic-bezier(.2,.6,.15,1);
+    z-index: 2;
+  }
+  .brand:hover img{
+    transform: translateY(-50%) rotate(360deg);
+  }
   @media (prefers-reduced-motion: reduce){
-    .brand img{transition:none;}
+    .brand img{transition: none;}
   }
 
   .nav-links{display:flex; align-items:center; justify-self:center; gap:34px;}
