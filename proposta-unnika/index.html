@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Giro Mídia × Unnika Centro Odontológico</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D1917;
+    --ink-2:#132522;
+    --paper:#F6F5F1;
+    --paper-2:#EFEEE8;
+    --teal:#4FA79B;
+    --teal-deep:#2F6E66;
+    --blush:#E8A9C0;
+    --gold:#C79A46;
+    --graphite:#1C2624;
+    --line: rgba(246,245,241,0.18);
+    --line-dark: rgba(28,38,36,0.14);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--graphite);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(1100px 520px at 82% -10%, rgba(79,167,155,0.28), transparent 60%),
+      radial-gradient(700px 400px at 10% 110%, rgba(199,154,70,0.14), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:var(--paper);
+    padding:34px 0 84px;
+    position:relative;
+    overflow:hidden;
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-bottom:56px;
+  }
+  .brand-mark{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.02em;
+    color:var(--paper);
+    text-decoration:none;
+  }
+  .brand-mark img{height:26px;width:auto;display:block;filter:brightness(0) invert(1);opacity:0.92;}
+  .client-mark{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(246,245,241,0.06);
+    border:1px solid var(--line);
+    padding:6px 14px 6px 8px;
+    border-radius:999px;
+  }
+  .client-mark img{height:28px;width:28px;border-radius:50%;background:#fff;object-fit:cover;display:block;}
+  .client-mark span{font-size:12.5px;color:rgba(246,245,241,0.75);letter-spacing:0.02em;}
+  .client-mark strong{color:var(--paper);font-weight:600;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px;height:1px;
+    background:var(--teal);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(34px,5.4vw,58px);
+    line-height:1.05;
+    max-width:14ch;
+    font-weight:700;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--teal);
+  }
+  .hero-sub{
+    max-width:46ch;
+    margin-top:22px;
+    font-size:16.5px;
+    line-height:1.6;
+    color:rgba(246,245,241,0.72);
+  }
+
+  /* route diagram */
+  .route{
+    margin-top:56px;
+    display:flex;
+    align-items:center;
+    gap:0;
+  }
+  .route-node{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex-shrink:0;
+  }
+  .route-dot{
+    width:11px;height:11px;border-radius:50%;
+    background:var(--paper);
+    box-shadow:0 0 0 4px rgba(246,245,241,0.12);
+  }
+  .route-node:last-child .route-dot{background:var(--teal);box-shadow:0 0 0 4px rgba(79,167,155,0.25);}
+  .route-label{font-size:12.5px;color:rgba(246,245,241,0.6);white-space:nowrap;}
+  .route-label strong{display:block;color:var(--paper);font-size:13.5px;font-weight:600;margin-top:1px;}
+  .route-line{
+    flex:1;
+    height:1px;
+    background-image:linear-gradient(90deg, rgba(246,245,241,0.4) 0 6px, transparent 6px 12px);
+    background-size:12px 1px;
+    margin:0 4px;
+    position:relative;
+    min-width:60px;
+    align-self:center;
+    top:-14px;
+  }
+  .route-line::after{
+    content:'✈';
+    position:absolute;
+    left:0%;
+    top:-9px;
+    font-size:13px;
+    color:var(--teal);
+    animation:fly 5s linear infinite;
+  }
+  @keyframes fly{
+    0%{left:0%;opacity:0;}
+    8%{opacity:1;}
+    92%{opacity:1;}
+    100%{left:96%;opacity:0;}
+  }
+  .hero-cta{
+    margin-top:48px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 24px;
+    border-radius:999px;
+    font-size:14.5px;
+    font-weight:600;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{
+    background:var(--teal);
+    color:var(--ink);
+  }
+  .btn-primary:hover{background:#5db8ab;}
+  .btn-ghost{
+    border-color:var(--line);
+    color:var(--paper);
+  }
+  .btn-ghost:hover{border-color:rgba(246,245,241,0.5);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.service{
+    padding:88px 0;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .service-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:44px;
+    flex-wrap:wrap;
+  }
+  .service-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    margin-bottom:14px;
+    display:block;
+  }
+  .service-head h2{
+    font-size:clamp(24px,3.2vw,34px);
+    max-width:16ch;
+    line-height:1.15;
+  }
+  .service-desc{
+    max-width:32ch;
+    font-size:14.5px;
+    line-height:1.6;
+    color:#4b5654;
+  }
+
+  .cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid rgba(28,38,36,0.09);
+    border-radius:var(--radius);
+    padding:30px 28px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .card.featured{
+    border-color:var(--teal);
+    box-shadow:0 18px 40px -20px rgba(47,110,102,0.35);
+  }
+  .card-tag{
+    position:absolute;
+    top:-11px;
+    left:26px;
+    background:var(--teal);
+    color:#fff;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:999px;
+  }
+  .card h3{
+    font-size:18px;
+    font-weight:600;
+  }
+  .card .price{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:30px;
+    font-weight:600;
+    color:var(--graphite);
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+  }
+  .card .price small{
+    font-size:12.5px;
+    font-weight:500;
+    color:#7a8683;
+    font-family:'Inter',sans-serif;
+  }
+  .card ul{
+    list-style:none;
+    margin:0;padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .card li{
+    font-size:13.8px;
+    line-height:1.5;
+    color:#3d4644;
+    padding-left:18px;
+    position:relative;
+  }
+  .card li::before{
+    content:'';
+    position:absolute;
+    left:0;top:6px;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--teal);
+  }
+  .card-note{
+    font-size:12.5px;
+    color:#8a938f;
+    border-top:1px dashed rgba(28,38,36,0.15);
+    padding-top:14px;
+    margin-top:auto;
+    line-height:1.5;
+  }
+
+  /* drone single feature */
+  .drone-card{
+    background:linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:var(--paper);
+    border-radius:var(--radius);
+    padding:38px 40px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:32px;
+    align-items:center;
+  }
+  .drone-card .price{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:44px;
+    font-weight:600;
+    color:var(--teal);
+  }
+  .drone-card .price small{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    font-weight:500;
+    color:rgba(246,245,241,0.55);
+    margin-top:6px;
+  }
+  .drone-card ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .drone-card li{font-size:13.8px;color:rgba(246,245,241,0.78);padding-left:18px;position:relative;}
+  .drone-card li::before{content:'';position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--teal);}
+  .mini-route{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .mini-route .row{display:flex;align-items:center;gap:10px;}
+  .mini-route .dot{width:9px;height:9px;border-radius:50%;background:var(--paper);flex-shrink:0;}
+  .mini-route .dot.end{background:var(--teal);}
+  .mini-route .lbl{font-size:12.5px;color:rgba(246,245,241,0.7);}
+  .mini-route .stem{width:1px;height:34px;background-image:linear-gradient(rgba(246,245,241,0.35) 0 5px, transparent 5px 10px);background-size:1px 10px;margin-left:4px;}
+
+  /* ---------- SUMMARY ---------- */
+  .summary{
+    background:var(--ink);
+    color:var(--paper);
+    padding:80px 0;
+  }
+  .summary .service-eyebrow{color:var(--teal);}
+  .summary h2{color:var(--paper);font-size:clamp(22px,3vw,30px);margin-bottom:36px;max-width:20ch;}
+  table.quote{
+    width:100%;
+    border-collapse:collapse;
+  }
+  table.quote th{
+    text-align:left;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:rgba(246,245,241,0.45);
+    font-weight:500;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  table.quote td{
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+    font-size:15px;
+    vertical-align:top;
+  }
+  table.quote td.item strong{display:block;font-size:15.5px;font-weight:600;}
+  table.quote td.item span{display:block;font-size:12.5px;color:rgba(246,245,241,0.55);margin-top:4px;}
+  table.quote td.val{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    text-align:right;
+    white-space:nowrap;
+    color:var(--teal);
+  }
+  table.quote td.val small{display:block;font-family:'Inter',sans-serif;font-weight:400;color:rgba(246,245,241,0.45);font-size:11px;margin-top:4px;}
+  .quote-foot{
+    margin-top:28px;
+    display:flex;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+    font-size:12.5px;
+    color:rgba(246,245,241,0.5);
+    line-height:1.6;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    padding:96px 0 80px;
+    text-align:center;
+  }
+  .cta h2{
+    font-size:clamp(26px,4vw,40px);
+    max-width:16ch;
+    margin:0 auto;
+  }
+  .cta p{
+    max-width:40ch;
+    margin:16px auto 34px;
+    color:#5a6461;
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  footer{
+    border-top:1px solid rgba(28,38,36,0.1);
+    padding:32px 0 46px;
+  }
+  .foot-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+    font-size:12.5px;
+    color:#8a938f;
+  }
+  .foot-row a{text-decoration:none;color:#4b5654;font-weight:500;}
+  .foot-brand{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13.5px;color:var(--graphite);}
+  .foot-brand img{height:18px;filter:none;opacity:0.85;}
+
+  @media (max-width:760px){
+    .cards{grid-template-columns:1fr;}
+    .drone-card{grid-template-columns:1fr;}
+    .topbar{padding-bottom:40px;}
+    .route{flex-wrap:wrap;row-gap:18px;}
+    .route-line{display:none;}
+    section.service{padding:64px 0;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .route-line::after{animation:none;left:40%;opacity:1;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand-mark" href="https://giromidia.com">
+        <img src="https://giromidia.com/assets/logo_giro.png" alt="Giro Mídia">
+        Giro Mídia
+      </a>
+      <div class="client-mark">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAAQAElEQVR4Aex8V5ddx3Xmt6tOuKFvRzRSI2eCIAiQBINFiqJISZSssSx5PDMO8njWGvt/zMs8zF+YtWbN8oNnjSyNJVM5UZZImWYEEQgQGY1uoCM63XjOqar56twGCJKgxEYgu+Fba986FXbt2nt/tavqnCahXCetcA8odNIK90AHwhUOINCBsAPhivfAijegE4UdCFe8B1a8AZ0o7EC44j2w4g34WFG44q28pw3oQLji4e1A2IFwxXtgxRvQicIOhCveAyvegE4UdiBc8R5Y8QZ0orAD4XUPdAqfkgc6UfgpOf7OTduB8M758lOS1IHwU3L8nZu2A+Gd8+WnJKkD4afk+Ds3bQfCO+fLT0lSB8JPyfF3btoOhHfOl5+SpE8Ywk/Jynt62g6EKx7eDoQdCFe8B1a8AZ0o7EC44j2w4g3oRGEHwhXvgRVvQCcKOxDeBQ90RC7JA50oXJK7liNzB8LliMqSdOpAuCR3LUfmDoTLEZUl6dSBcEnuWo7MHQiXIypL0qkD4ZLctRyZOxAuR1SWpNOKgfCD/9bd76svyQsrmnnFQLiivXxXlV92EDpY0vtsdoCDOBErYj5EbLxON/TCABYc+D5R92JleUFI8CwMyXn35wC4a7nF+WPnXv3Zq2/+/I23fvbWqd+eqg7XUAUyIIGbw+TZ6bd/feQX//DzF/7ue//4v77zg79/oTHd8BA6n6WZzTKy3oMYLi8Ib+JgQshW5gY2MWg5lYgkqj7TOH3s9Es//+3I0ZGLx4Z/++K/vPzLl0fOjixMLVQn5wMjaTWpz1Z9LDqIQxCoIAgo6d6jZQ+hACQw2hzDiJSmKXNHWDS0lkuXLo0MX2rWawqu1ahlaasYxQqSNlu1+QWOYwxa41FkwZNvuqd+allZQ7AUhMSCV2zxAY+iEpMnrcIg0LyQQrkwjrq6ukqlUm9/X99AfxzHOk/EmEHbTBMwOWSZ4dMaQ2LhHiO1zOxRAk/ANcUEHj/4E5EI8lkoFKBk8urkqfOnT559d2puOnFpLalb7YY2bxhcvzoTk1keqM467qFw4AXJUYijKOUo4R6ja55almbR320iAEnSEpEwjK21tVotyVp9A3079ux66LFHdu+7b/P2bYNrVqs4lEAXyqWoXEidZbgSQF5LdeihU1qUWtb23hoIy88kx0PNa0XwLCyJUUTbtNZhGIpIK03CQrhz944/ePozjz/zSM/art51lc33De19ZM+m7VvWbFi3ZmhtudIVxlG50kXsAahAEUgWKJP5PUbeWcvZJOdRBJHQxUAHQZq2iOi6obV79t3XtarEV49WPWOvJ4XetZW1a9cSZhFXKESVShkKImDKuLk6mxdZu6dILVtrHHiUkcQiszarXp1vNBoWjltlEIWIAYGxNi4HNr+1sAqgVCoMD1+4evVqT3d3s95IaikcNBDrgPsoGe49Wr4Q5r5uq+fz+Vq1d6C3WC40WnUVKg8L4HjGKagcTuRAigi33GazHoYawnOTKBuK4lXIZAzFjOV7jLx3lrNJ7a3Pierp696waah7oLeRNRqt/LOLIIg0yEEjSBG4bVYb1WbarDUb23ZsH1i1iicilNBA4sp9mMTyPUY0fZlaJMQtfw9o6xeXiqIlLOioEDaSRpamHjwGooBcJGjPOF+fj0rFtevXBHGQZMlCfaFWr7fSJLMpeHJ68mz30m/5QciYIV27O17Tz05NTUzPTYtG72BfqavYSFrzcwvjkxP1VrORZdPz86MTEzPzC5nYrTu3PnDwwEK9NlevJlnKs1OFoVPcc5FmBPJegs/bcs1Fvry8fuJAYogpvmYAYRzxIOzt7+0b6A3joFpdmJ65OrewMDxy6crElcvjYxNTk9VqtdVq9fT0rFo9uH79uoGBAZbLDF+IQGget1Pm9xip5WaPu2Gvo9c9il5FNTDQV6pU+gYHCuXi1Mz0fHWhWCyWSiURYXyV4sJAX79W6tLF4empyUCk3Fch0lHAmw+4xTqTUZqSZWevN+72fnfCJAd8gHKd2m3wkNi8AYtsiy1sJOU9i6w2x4+I+Ea28UG/E0USy416HQHiILw6MZk0W6sHV/d09ezctmNo/drNQ+s3rV9HIC9cuDA5OVnsqSDhC4iPYy8Blq8UlOAV8LOzyKnbBFY8tefzpXY7c1+54ceWNr3Xlg9qN/rpcvl5LztIHyzm9TudLR3CXDNmJHh30IAblGJrTsx4l+e35hwV8rSJnCywJ3UweRe82eR2bCeRwQs1dDxVIwlvlEopGOMYdsjQ3d+7cfX66ctTjZopFUsaVmVZSI7MXLk03KjWHnvqSYQA/1zB4crC8UXCCnjtQTvl83IuqsGcDNd1YH/eAt9FNurFJlJeZpdvX1Q4H2SRLzsqz+9IzHPWRQYOdr5IHhK8WZRA8o15py9wxG0SrVyiBPkY/O/j8dryB+Rz5aW2CG8NS+2WfItjC4lti8QusSABPMb4bkcgSPwcWunpHR0ZI3DkNMaDBKWOHz9+8JGHI34HF5ANH075scrOD/fc0MJZWfOXXM/ZrnkA8lKesfua+2kUyTeABl7vZYPw9x45L8G+V79zpevTL0Ek9XyfLnSxWNcmBXqJDBSnwUOIL2XaQVv+ZYhNjj/O2G4R0GY2COhuOsxAcZGTyMWxwoc32/uqHc3+xYB/tdXoHhroWzM4Pj7GdU+uVByHXxodma/XDhw4UCyF/AMh3ksU6wmiOBGs8uSn5sQKvvAea17l5Dl5TvjpnR8ni1yq3eLgleN48RICqMAbntf9miO3WBYElAIm663jGUGORWk0kMSu2yQvcUkiXM7dHtYuMyfZ3KR2ThZvAryu8BZSdW8w2skRVwoIFLs4Mm/kQHKydVGMBydvy+vvsYjlINLA6oFCFMxN+T/q8vM3W985eeKBBx4o95Q5q8oF5aMUqw5+Z+Ti4BR5I+CoUuDyhUX43yP2+EbipDyn9dm1n4CymMEzMSMJRTtwOIWTl8RGT9TTP/yPI3JZIC8ZmPuSf4DycNupLXwJYqhQm9pjnIeGinGt+RzwBTIsaklFndfTt1wbkHcpRmLbfl8F43WRFHhuWd/oAPeeeg5OBwL4WZxDpVLctmnj3PRU0kojFc/OXHXG7t+/3w/kRGRkTvIFnocELCdWvVjQ6RTEfhILnsSLZpXEKhlATvKz7nMO9+uAbYv2+Eb2vY9ydTmau4An50Wy6keA687T+/j9FO9vuIVaPunSxlEn7+LrJgtoL4kY+NUvlOYN5QNed3bjWuJsvhsgQ5vYw5ZrZRY1KIetWNz3nJfJcdZkgS+SFa0kURoD6/oFxiapQE1PXr1v9944PwX9ySjwU+Nm6WZdXuiHeduczEHw8q3Y81huj1B+nVFV3wA/FTVkVSiIBJ/4tPCG+go8etIu3emcUy9FJPVq0wcGEUFGjFPiFEjsJVtuAFeiRcYaibuN77zRFGW9R9giIINDe49V3itspBxhkY18m3AQB178TBb5BvZhcFW/torvD+WotGHdBvCeC/AvTWASgASfFHxxscYHCWAj8sSCwFdZyBt82RcEfhi8YtTcgiuoPTFr/ANITrwi56EmzB1Z/eJGLsCyhmvJed2JMUnabcJ+C5+367eeX1d7KSJczuzRyAvMvF65KBZIbKEB3ixfYkcAS+0V7czbvWvIRvL9tGTRTfSN8/ZzhFrk4VxtogOBRrPVyoyKQmsdxJQG+qGCmfnaqrXrU2MRiY8XvSjXS6B8MmJRqLCaExcDnxa5QvC9rJKutwgrbbpmBWvtRgdqq/C+QexUfjqlCLTzXb4kbCb5AYpjFoktix3E22JRBbbeIqkljzO8HlrQg/A6W0dn8mxSfJOrWbSAOrWiiiQyOM8jdK6BNFNJMvqO/fxSQnKg/sJP0HzyRXy6Wuffi1IQBTCqrbXNJhvYCZdlEM05w1J3U4VNIA3EaW3gVCWKeitJoIIyr4XwMkGxi08WSTRSA8I2zu3gkhSpr2ZYDCKT0SLvS+pvcs6Uf0lupW1BmTOADQE4ZTPJECYInYSWWrIRwuDnwBrQJiqdOdHgZq/E8yjvBc95V35qaVJzYCAc1S5BRBxUC4ran5maPjU1e7WV0jVENU0d9x0PsUed9gOKfxDCZN2dGK+fnm6O1LJMiUSFKjBSbQxX6xdrjaksacKjSMlxGPm/+8JKEFBPuqUBXJybOz1bPTdb44yJltGaHV5oXak15hwygSNWQEbIOeAaCUBCOwkkCl2I8Wp27PLk8Ynp0WqTx2xL4eJs9fDw6ImJmZkEQZHfgUIOW2gs0ERK5WJNE+sCTW3fujh6fHzqSq1pJDCiE1HjSfL2lakj07NHL4/NWgcRGg2nQIV8CRD4JH6ROV+yPrsTP4KxNDFWiaU218ZZqFRUHfjpkePff/31H7z52qtnT82mPLK4m5APVikTRY5vEKH3SDXDm6OjL549/X9fefmFN147N1+dA14+f+GHx4788Nixv//1Px8eGZlF6kOBGHIWoRBH+/kjfkdGR148cuxHb7398yNHL87Vrlr8029f/tGbr/7zO0ffuTRKBkN2gdbe58CH3KRQS5rEftzi5XOnf3Li+M/ePfnrM6enuDIy/PLkiZ+ePPHjd469cvHCVUFLUEtb/BBLLRT8fwzuYjVt8asTF188ef57b7z9y+OnLs3Xmxxbrf765MmfHjvx47dPvDE8cmz0Chv93AxjB24nYCJ4JBauk4PH83r1VgtUb4lDlTi6iYOokGNRHFTN2LMTk5NZdqWVMhanalUCGIQw/CwGOlJ71OlVoVPs2empM3MzC8V4IkurzhH+09PTlxr1aqGwEERHRkYuzc1zLyKKtJHzgFEAZ4EMwVi1PtZMxlrp8EL9aiO9PF8fri2M1Osj83Pjdb8P+w0CaCuIG9KiKCCKY8J8tZmcnpgcbTYn0uzC1RlCeKVWPz99ddo6Np6bvjpnOB2CsOAglssUyoXRPPDSsXP/8u7ZWeh5CYZnZmcbTW6hJ0ZHjlwcmbJYUOFIvXX4/PC5qarVMPSuQIWhsfyaSD8sEnxin3/c/u8WBF0b4kAEFbECmqltBnG4ao3q618QNI0jAFQuyxJjM+c8kkSbLVDSsEC5yxS7qtbVUkMIx+cX6uwodtlCabyRnRiZmGj5v+x54J0fZDI+FCdOEbhCWfX0ZFHUVJhtNsK+Pu2rcUIWv1yAvOCH0WP0v3Bf45Qk3xZwH+VqsEisxKVKoas3yVQzowmS2aDcMxAVu9hFbg1eg4UxVOUdCmoW+OWRM69fuOgqlbCnOyoVK709ha4KLa2mpqWDuNKnu/qaOh6Zrx4+f2HCIA3yu7jQUYs6LT68IvAL7cNrDUtOaqkjhDM7tYgHnQNQRJKZaittONWQIHGBJQ+QWRPHYQAXiSjJ5xE6Fa0sDQuFzNjUSmINe1QYBVEBEmRculHX2bGpdy6OElp6J0mtSfl3BvpT0f5mZhLrePzwBtEwvHMkiUECxTXUkjmVhgAAEABJREFUaLUsvDI+YKnTNSg5inOL/7HfOi4pwDjL9SE6MBatNEsyauv8nVa0hRj6XPiG4rI0EacKhSLxe+nkxTfPXcqiYlwu1+fnSs7tHhpaVQ4tEBXKhVKFy6xab9igYOLi6cmpE1cmeWo2vBzkG7vXzatBTUiOKubkC6zfOlHK0ga/pwR9xDCE18wkiKJSFJe5FpWOlFI0rGUYGE4rJbDB9UnEps0WF3xBxxwgFAJuVS5wOjKqFJR1VFlI1NnLk2fHZpsOKlBCZ0MnzYTMxciPKoWxVnA8ZQRKqWJYClWooP0sbE0z9gF+ubCWP63Pia2jrHzRKARMTsQ6PrWG1pof6rhMqBtlaooT0VoCreoOb5y5cvj8SBZ7qHSarArV09u3PbR2TQXQzpMyruBUSUd0SVCs1EM5Onrx3ZmrdUU1HA8bT/C+QjsJcJ1wW0ndwmg/db62xfmHpXtc1mqmjqoalSQMv1y9gCu6Ld5lGYPHOoEKNQARqdcWjDHWwEsTbbKELc16VUHruDhZb568MjabwOh8iHMB3QkweBqNRn2hmjZTiOoqV1qNJEtTa5V12ouycJxG2iD6m63Jvy9nCFriKVExD9pmYrMsM8ZRh4ALzsJkVrwaSFOXpobBTdusCud4/h2/8ObZC7ZQLJXLpllfFaindu84sHGwVwlv2DHnMpZ/y7RJA9xQGd6Kbzi9I7PVdy6NN6izSMJNAyzxBwVQz1w/FnH7aclSnLF+DO1zdG6YPyGx6Ahp0tQQcUpEU7NAogzG5JprAiCSwmZAWIjTNA1LhdQaJ96cxDoVBka1othljTnlbFKM3rp06a1zF7gXzTVbUBKGXibFevlOaRUpKTTqhFgr4diglUPoHIKC5tKw8PglzrZgW05xWx4FXrlSPT5Vv1zHQH8JGVeg4xoiioUImQOH0pJSua/ZtEozejBr8cNjw69cnmiWS2FXqbUwvbYgz+7ddWj9qtgiDMCrswEy2EIpCkNOthBKMw5kodFCof/sSPXI2dkWYELlBJnhRmLt9U3CWgdFi26TbkmEd3s+r8tzQOCUM+KsODD0mJOFLtdWFDs9gclCWbICDFdFZ8PzK4D8EAtxCmb3xg0FsYlLi6v6zk5NvnvlalCKiXGaGnJmWebEaialxG/Sfu8EwD4nfhqKYoFVYymNf6tnnARVa9+8OPbCb4/95uTpNy6MvHtlYrrKXdiqINL8ROAYdn5fFVFpYpLUFUplKs83ltfPjB0fm3C93anW8/PzG9YMPnXgwW09hdBQeAZYzsXZLX+eaFy2sa+nS0xXGGatLK70HD1z/uy0yxR4iRPttdWBcvlrqyge4Txr/Mjb+dEtSxvuCApHCEDKM+oVWITWkjRRhGVOF2gLRodY+toT8tS2mY4mcVRgHYfzOFFWaSuRwf5N67b096lWQpimGs0jF843gUwJvUVPZTal44JQMVGe9k7xeohz2jEiuQzYDDiloX0HwK2MbwtHhi+cnxiby5onJ0bPTk9cbTQzoUvpRkVu46A9u1NC+1yq1ajF2+MzR8YvVh0/6aW1Wq0QRft27BnqDimWzFasgc0nA/UHlAPBUavCaN/6NRXTKqnESHO6OffqqSPTBk5B0XV8AFY5Aw6HcYsS2nJuLacBSx8oaCMB8WOZaWcFJCP0NrxaNMj3UeM2+cr7f0JD6HcvQzk/ROh3i8EYD27ZNMB3xJkZFOPL1YWX3jmTAdw4OZ6xZ8Vx93XOirUBncJWikLGqcWX+SMpreAAA4zN1Y4Oj4w3GsWB3mJfTxrrmnKJoh+Ju3POKAWuBAdrTBoEKoyiatp4+/TFty+dnXUJA9WZRIuLw8hm/lygrhkx5ySg8s5PCoCbAxeNU5HJ9g+t2dTbFaRVa2pRd3hpZvL1U2d5AHNgmnDT9buIAX2FQhRz6G3SrUBI11AbqkD1Wfbk7bAQS1P48/sYWzwpWtlWke1AnoH2eiLm3nA6Wvmqg+JyVik29cb7N20OWiaDa8Xx2xfPn1+o0QWcSEchZzGOvkyNMc7ZtnDxWymBbtd8RGT5FjXvcG7q6vmZmXklWajm0pqUiiYIMqURcDY45xh5CrCWuzXHcAPOOPPlmakr81ebSLOkwftuX09Ptb5w+J13xudANRr8ygpQa45bnJIlCeBULK4HOLRrW7eme5pN19L9lbfOnz07Mc8NJAyDtspcfBoIwNV4XcAtFtSSx9ECeDP4pP+4zD2JdyHxoNYQy65rjRYCEts5E0mzD0xEW1nlISWn9T5XTtjPYzDhLeihbet3rF2bNpqqEDUi/ea5s2P1lCgKXc9j1xnOBeaWsDnQc7kkX+J0gBWRQMh/4Wrt1Nh4HSJxoWlSQ6BM1kwT46wwTokehTjec12eLK+i9Zb//zHo60BJ6NyWgYFC0rKtOqEen585yqOthbjII1YJqLEVwEkeyzQLUoiKVGN9uXRw907XSoxNpVxacO71U6ev1MDoRxDw1ux5yUfypdv60WtLG0+NxYF5e5gF6MVMKSOewB5HmcoBxMbwqk9W4kWvOlB3bSFOrLAuRsQqZQFiyeEWYuGTyxL+MfeJ3btXlQrNRg1dhdPTk+9cHp0BUr5AOjildSCc0NkkH8RxXiQfTjgz+Ev52Xq+xSNwrF7TcTEMYyVBGMYw1qUZI5gzWWsNpTkO4ghIQLGBUtwMrG4lq6LCA0NbPrd33+ZKBc0aBeie8smx0TdPnWU8wfmYU5bGgnM7sRbKwTvBAGy9f/OWzWvWdcXl+XqiewYuzFffujRCE3gr5SsGp3YWXlHqcXvEuZYmIHeRV1Hg8/b43IbrchSrrLCLNhEslgXgQHFc9gDHOXaCNtMK1qU9gC4Q+kRCHfCI2Nob7Vg92Jy9mjjTCNypycnxFlo8QBFBidZKCcOd66ctg2IWifVM+VvMsZGR0+PjJgwoUGWZGJvUG6UwDpSmMnR5ktk2llBeH2JXKJcKhci0mtWJyX7oz+zYvqOguJjWdVcaCwvcipuhOj89fWaqlgqn4ygSXNtIbsaCOlSVSy1H58CD+4MgqtUTFxXTcuXo6MiZqQXezpzwPVhc5ugCOMq5LfIaLE2AV92P8CM5Pa9WFv2lcqVQCnXEm5ZSQZpk5LJJFhAqLjZ+xcqspRMVavVWoVim++K4yICIJKCMADqELoQRd7Na0gxDxgFi4LGd2x7evj2tVSUMLtdrh89fnGtlEsRpYoMgCEMRMc1mvVzpMpBWQjghWprOb6+vj0wML1QbiuioIEl2rVnfW+oqhUWiqKxRSokIc/CLGhEA6s1WrV5vtVqOR3Arefrgwa88+vg6oMticyngJbmkJU1bUihUA/2rw4fHqgmNzJy0DLTWzphQawThhbm5l05dfHn48usjY6eGx8vlvmKhOzU8iYvVIHrz3LmResoXjCgKVCAQ78nb/HkgbkEEl11O0GDscE8BsjRrNtI05Sa1wHu4X4YKSkMUVIAgVGGYAJenZ2aq882kxc85sVZhoImh5uGQGUtg6VTtvzpSJTZ2C7YPDGzo7s7qTYTR5fn5qbl6GJWiIK7OL9TqC8VSXOwq1+t1Do6KJeMnRSbqcpKdHBufNVlcKCBtbR0Y2LtpyNX43cUESsu1xNlyCghiV6UnLhZEoAW9pdL63t7VkSo58PCmQvs2bdwxuBrNFhcZ3zJnnD12aZR3JYSINNJmyrAOteIRe2l69sTlK6+dPvvau6ffPX9+aupqUmu4zGWQemam663jF4czhQTw+Fncflo6hFTWT8vJLfcB1iInIVBQiqub57yNg4vTk2MJXKQyi3pieHLwb29NAf+IMZ02EQXd3aWsWe8uxj2FQkBphm8IjEYL4YWbwgiD/5bRDdy3ZvXeNevLVowx861WPeW65+sXJCM/RCSKolZqnNI6CDkdUawBxy4NX5qbbVqrrRmM4n0bNmxkUCfcCpwE2giIBMdqESJKxZ2DBJqKJEmSJklJ695SscA6xSGzWXNtqA9t37m+UHLNJjf2mlZHroy+OTzOuSx4rzIuTfkQDRVFNozTMMwCzTI35r5SqS+O0voCVa07e+LSyPlpv50ahYQvKcJpbovULY32ll0fqMTR6/dv3VoU4Yaiw+DsxNjbFy9OWlQ1TBTyaz2/9POvrO9OzVyYmmimTUmzME3W9XT3lgNkgMmUgOFhrBUuCtDFVpwlun0q2D24bvvAajSbsQriOGagp6kpl8uVUqVaa6U8aKJYiU5Mxm2bq3tkrn565ErC3cHYQprev3HDtv6SMwhFUUErxMQ45/w8PExZELEWacoPYRBnbNKCM5za+9Y5OKfhuAA2l8ODW7aXM/IAUTRtsqOXLp2fqmeAQJs0M2kSKmktVNFq6cy6VppVF5LZ2WRqvDFxpZAkXREP5aDm7CvvHJ/KHOezfjXiNtPSIaQz4Feen5hWKihIBGxdvaqPcMzPKW1tIT56ZfRXJ868NTF3Yq5+Yr756vmx35w8/9r5c2PVaqBQErO6EG8d6O8SOMttzCnKUQD3G8sGLzsIApe7cqhYeGjjtsEwKjijXMobj3PkDwRRq2nT1IZhnGWZsf4OzL+XH704PNvMQgS8VW7q69+/eWOZ8hJEgT88HbHjhCDCEGOFq8dxO7HOpGEgcRBGoomuYeIoTgKrwtAkWQzsXT+wY/XqKDPWOZQKo7X502NXuDqhAw4ku87Mjr6+/avXPbJx88GhDfevWXP/msEDG9c9umXj3rWDqM6l/Dhc6bowO/3W8IUFQAKhK3F7SS1xOGck3TDIQcRFDl02e2DjhoEobM7M6jCsOTk8PPLSyVM/ePWNn715+I2LIyfHx6/M13ifjiy6MnvfmjWb+nqJvRYUCpE4Y7IkDnWkRAAtoogq57Hge9a2gZ696zaWM5vVq0GgSEmStVIX8Ps6QpM5m2WiVQM4MXLpzOiEjkqSmr4gPrBtS7+As3QXAbEOXCXcNVSso5BLxFgeX1xSoRblMmUNEYXjQuEWl/+LUQKe4hAVR0HSML0aD23f1cftNEtdFLRCPTo7N75gdBDxb4pU2CSt3RvWP7Zz8+d2Dn3x/u1f3L/nywf3Pn9wz3P7tj6xc3spSUyjITrQXZUT58/PN5pU5/ZJ3ZIIuoLGKTDzJHwFXhXFj27d8siWrYNhTL+osJjF5akM80E0ZcFLSBaXUh3Qzi4nQ4XSgaEN6wpRCBRC6S4Vs8TfhroKcRSqUEAJDHURDYAxUQL2bdiypbevK1QwrSzLwqhQLvUEuhggsokp6NDAnZmtnhoba1ilVdQdxPs2bdrUn68SCgG3yhRAABWrqBxp3k5DEE7ESuU6lAK4jC62rlDg7Tjmakv8clUcRYMVnHYY6pE9GzZVokJqMhPo2VYzEV3u6YUKqFWgoJJG0EpKFiWDsgM1L1gTWLeloh/dvWtNV7drJtxgRJTOqAy8dE5wG7RkCU44hLgxJwEswqdYhPvVo9uHnn/s0N7Vg90u6xZ0iesOtGo2gpsS66UAAAuZSURBVEa9kDT7Re/sX/UH9+356mP71naFRYFJDfP+OCzUq4XqQr9SRaVyueDa945TsAZZE0M9avfaNZv5XjA3EyzMbOwub+hToSNwqXOuUO5qGpwYvTJZqxNblaWri4X9W9d2ATCW2UKNf51vaoVQhKp2KfTC9ZiUVGEB2Fgq9CtVSps9Yge7igMhYgFVofCM0W+yYjEIgBi4f9PA+igs12pdzYauV3tjrC4X4kZVz18dCNx9m4bWdXMTQGw88U5UVlJREiT20W3rdvb30kw1M7O9v78r1Mrimv9wy2nRXR97vBKhISGcar+Tmsxa46CEdprUdgF7KuEXdm39L3/wyN88eejP9u/5yuahv3784f+4/75vPnrwm48/+tUH9z28rpe7GicmQjrUjLYvPLjnz558/K+efPJrhx7qEfCg4cuWE6Q83hwSa6MiIvpubeX5vbv/4tBBivrq3p39FgXTCHVLIvBSMbbQGp6pCl8SY74Izj15YGe/RmwRK2UAo9HTU2nWFwSZNGuVFF9/fM+X9+3+8r5df/HMZ9YAfAX85uef/ovPPfEfnjz09O7tXTlayBIR0Ywa7h+AFq/GkMKfH9r/nx9+6K8eOvjXn/vMrhD7K+E3n3r0Lx89+LUD96+JEAIQ6Ag64JPElYBSpGKHp3Zu/qvPPvG3z3zu2T27++JQFG4/LV2GwDrwBkDVSIp3KsVrARAoWluvNmhAn0KfxfoQWyvlhzet29ndff/qntVKBrUM0qrUwUABzRZvCQgEvNRsrHTtGOjuBhhXIrRfLTRSmk4gg1glGT+KIQDWlPSuNX1beyq9YisKYpvGJK20oeNCM7WMR8NUm39g6+Y15Yio0+k2gwW4zKCkVCqEVNMkRWe7FXau7tu5dhUDRadNrqqKswzEPiXcPLSzNDIIFN6fNHwgEuA9fX27+3qHyoUyUAFYoP47Bvoi0Cv4QBLWndPW9AeyLg5J/YHm0csQZ89t0gdV/L3ijHHWefsMbQSsgO839bSVASqQuKvIV7emddBogkhoC8/DnJc2HYAFaFHaFyTQbKHFs9VGFHvOWjNNnG0BKRAVQ8ocHpuYb6WK21+AKs8fIAGCWPP9nr0JdwDlRCSMdCEOeeQQm039/Q/v2UG8/RYMKO1tcoJmkqSwVpxopULuYSDc1EUBcRgJEAVBkcdgocCo82N+3y/QfpLMZCTytqss3JSstUopSo7yxAKrbLwp85Iaqf+S+AERpQS8hnog/W5KPeqt5o9/+rMXfvKTF374w5+9+Mtzwxd/89qr3/ned7/9/Re+++Of/Oa3L/+/F35w8vSZ8auzLLx15Mi3v/fCd3/woysT49/5p++//Orrh48eubpQ+5//++9++6+vvH382D9+//svvvTyyNTUt//phZf+9V/OnD/385deeunV1w4fP8qWV954/Vvf/d4bx47N1OqiCZ/wTtKs1zXDrV7rgXpg69Ze8KtKmiV1SIbcRKVgyGBNs1V3zoSx19z5ZAgBmKxTkEgUiULZ8LvJ8IjmLEoTCZLOV0q78aYDtdYfEMsqG2/KjKW0qqUwe16t4BFUjruYr8OvZWMMNdyyZdOF4eF3T5/60U9+/Mbht1pZWk9aP/rFT1985aVNu7f/65E3f/P6K+u2bTr87vEzoxcrq/v/2//47/c/cuD7v/jJz1761f/57rdNpI6dfXf4ysjOPbte+MELl8evFEqFDZs3fuvb3ypVyr948Rff+s4/HHz44PGT7xx67BDzSrlkrQ0FAZxLGrZWHQiD+4bWbe8rMzoKoqOYm7qjkvzR4aGQWcisBVkGbq0+3jTjgexgfMI6DQjQhjcvseKfbPwAOWPbLVoUqV1mox/w0T+uGfqKxMJHcy2tZ8kQtsUriGKCNw8A94Y0SUYvjfR2d+/asfPZZz5/4IH9++/ft3PHjm98/esHHnzw0vDwww899NDBg5dHRwdXrWL71OTk3/7N3xx5++3HH3vsj7/2tc2bNj166BA5eyvdZ9499dknnzp/5my5WJocG//Cs8+dO31m49CGp5986syp03t37zn69pHVA6vmFhZ6K106bdnqfNRKdLO5ZXDV/p0bYupDncA902/bjvspn1krdkYaddVKeEoqYTcXH5TnfN/PtzgHJ87yqCA07+u9sUIYSGmeWCDd2PuBMntJbKTbSCywSmLhNskrvDQRfkk7WKeciINyLlZBd7H81S99+SvPfeGv//zP/+hLX7pv565nHn/iwT33Pbb/wHNPPPmnX3z+T5774gObd2zqHfzqZ5/9xrNf+MZzz/+7p597Yu++rz/7/Nc//9yhXXv+6OlnDmzb/fmHD33hM09+4w+/+id/+If/6Wt//OxnPvPVLz7/zBNPfPPf/+l//cu//OMvPf/cZz/32UOPPvvU01955vODlcrGwcHtg6sHtBqMgl1rV+9cu6aHxjhGmEtMYnIQ2BApdBfjTb3960rFvihYy4UWI9IINYxlSBiGMbSGCFEjOQGUEhGO/SgKw1DypPOUF4WNH8XfRqvN1s7J2W5k4XZo6RACzhjQ0Pa01gVaIiWBSH2hRlADIAR0nktqCwJtETiEDhFUJQ55V2G5t1RI62ksml1kIEnKm78f61vAxeFDJIJQpnJeICVHSpj3lvlG71uk2friow89ft+e/Vs2fvHxg7vX9ERAIEiSJNBRKLEFk9/xugM8sGXTQ1u3PLbnvu3rh6ghP20pIFAegYwbKxkZmjnRxaxBxOcf8eMe3gaAIUUiF6tsZOGmRB4RL5BsJPKICBtZuE1StzBegsCv2XwktQDj0kEJuivlULxnIwEdTSqGbIZwErYHCEKAXSGU9oViKWy3iPI8cYGHFPvRFsI8ACLlqyxreMnXC+1qbzHuAg4MrX1ix5Z++Os+hyigGMcAnyI+B1MAbOkpP7Rx/YND67b1dcfwYrk42EUKeL0RbwcHkGiQ14MdrDC/GdH7InJjj4iw8caWm5bJRrpp1601qlsbdpNRtPumdBPW39l0UyEf0ajByAZf6fhuR4rgYZZcvAJXj2IO0Ear4QEmcm3SOc/1rC3eXq+vqALNW6K+3IDeI0BuRrghtd3z8fMbhv7eIicnGIwwhrd2/o7MwKJJ7fZ2gWUWAAtnyUNO8pPNB52Dz/NpiB9rzFlr5+Bbhqech30fkzj+k6XcuqVM+WFDbjKabiPdpOPON2kwwvi+/p5kzkyrmIuPP9yQFlEk6ovIkemGbhY5kDmJZvrVydKyp+s635qmXK/8EuMdQps/QN4F9NFdJSxOkgegV4ahRm04J9rJh5H/EONrbJU2D64Ng0/O1+gI34/FMtqJTe3CcswXdaLmi6WP+aBRH6abjnX5DnTTrjveuDiX18x6OLltenpvHuuLCrw4+UJe84VrP7eInMIHI/cax/J9UufbVi63X+C90M7xSSbGGf+8iBwxBpm4vNjeGxahUh4XvpjkxnoVrYeZzDfq6T4l/W/U4ZbKuVW3MNLlY9o5i9cLLH8aRFyuTXtD8VoTn9fsbD/bOZvfT7SCBI8lVk76CGN+lwEc8n6i00g3DGHtOt3QfHeKnAmMsuvvD4u6CfxLhUdD2pnP4dMiA6CuN/lmga8yh0/XnlhsZP1jEj7ppG5xQtrDke2chU+bqAgJROU9+ng6CRZBwkpNtwrhSrX3HtS7A+GKB7UDYQfCFe+BFW/A747CFW/evwUDOhCueJQ7EHYgXPEeWPEGdKKwA+GK98CKN6AThR0IV7wHVrwBnSjsQAiseB+scAM6UbjCAYT/69qKt+HfuAGdKFzxC6ADYQfCFe+BFW9AJwo7EK54D6x4AzpR2IHwY3qgw3bXPNCJwrvm2k9KcAfCT8rTd22eDoR3zbWflOAOhJ+Up+/aPB0I75prPynBHQg/KU/ftXk6EN41135SgjsQflKevmvzLCsI75qV97TgDoQrHt4OhB0IV7wHVrwBnShc8RD+fwAAAP//3J9GXgAAAAZJREFUAwDdLhW13DHA1wAAAABJRU5ErkJggg==" alt="Unnika Centro Odontológico">
+        <span>Proposta para <strong>Unnika Centro Odontológico</strong></span>
+      </div>
+    </div>
+
+    <div class="eyebrow">Proposta comercial · Francisco Beltrão, PR</div>
+    <h1>De cima até dentro <em>da Unnika.</em></h1>
+    <p class="hero-sub">Uma rota aérea da Praça Central até a clínica e um tour 360° pelos seus espaços — prontos para o Google Maps, o site e as redes da Unnika.</p>
+
+    <div class="route">
+      <div class="route-node">
+        <div class="route-dot"></div>
+        <div class="route-label">Ponto de partida<strong>Praça Central</strong></div>
+      </div>
+      <div class="route-line"></div>
+      <div class="route-node">
+        <div class="route-dot"></div>
+        <div class="route-label">Chegada<strong>Unnika Centro Odontológico</strong></div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Vi%20a%20proposta%20da%20Giro%20M%C3%ADdia%20para%20a%20Unnika%20e%20quero%20fechar." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-ghost" href="#investimento">Ver valores</a>
+    </div>
+  </div>
+</div>
+
+<section class="service" id="tour360">
+  <div class="wrap">
+    <div class="service-head">
+      <div>
+        <span class="service-eyebrow">Serviço 01 · Tour virtual 360°</span>
+        <h2>O paciente conhece a clínica antes de abrir a porta.</h2>
+      </div>
+      <p class="service-desc">Captação e publicação de um tour 360° navegável, integrado ao perfil da Unnika no Google Maps — o mesmo recurso de "ver o interior" que grandes redes usam.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Somente recepção</h3>
+        <div class="price">R$ 650<small>/ pacote fechado</small></div>
+        <ul>
+          <li>Captação 360° do ambiente de recepção</li>
+          <li>Tratamento de imagem e costura da cena</li>
+          <li>Publicação integrada ao Google Maps (Street View)</li>
+          <li>Link de navegação para uso no site e redes</li>
+        </ul>
+        <div class="card-note">Ideal para dar o primeiro passo com investimento fechado e entrega rápida.</div>
+      </div>
+
+      <div class="card featured">
+        <span class="card-tag">Recomendado</span>
+        <h3>Clínica completa</h3>
+        <div class="price">A combinar<small>a partir da avaliação</small></div>
+        <ul>
+          <li>Recepção + todos os consultórios e ambientes</li>
+          <li>Vistoria prévia no local para mapear os espaços</li>
+          <li>Média de R$ 150 a cada 2 ambientes além da recepção</li>
+          <li>Tour único e contínuo, sala por sala</li>
+        </ul>
+        <div class="card-note">O valor final depende do número de ambientes definidos na visita técnica.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="service" id="drone">
+  <div class="wrap">
+    <div class="service-head">
+      <div>
+        <span class="service-eyebrow">Serviço 02 · Vídeo aéreo com drone</span>
+        <h2>A cidade fica pra trás. Só falta chegar à Unnika.</h2>
+      </div>
+      <p class="service-desc">Um plano aéreo contínuo, saindo da Praça Central de Francisco Beltrão e traçando a rota até a entrada da clínica — pronto para redes sociais e site.</p>
+    </div>
+
+    <div class="drone-card">
+      <div>
+        <h3 style="font-size:18px;font-weight:600;color:var(--paper);margin-bottom:4px;">Vídeo aéreo · Rota Praça → Unnika</h3>
+        <ul>
+          <li>Captação aérea em plano único, do início ao fim da rota</li>
+          <li>Edição com trilha sonora e identidade da Unnika</li>
+          <li>Entrega em formato vertical (Reels/Stories) e horizontal</li>
+        </ul>
+      </div>
+      <div>
+        <div class="price">R$ 250<small>pacote fechado</small></div>
+        <div class="mini-route" style="margin-top:22px;">
+          <div class="row"><div class="dot"></div><div class="lbl">Praça Central</div></div>
+          <div class="stem"></div>
+          <div class="row"><div class="dot end"></div><div class="lbl">Unnika Centro Odontológico</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="summary" id="investimento">
+  <div class="wrap">
+    <span class="service-eyebrow">Resumo</span>
+    <h2>Investimento proposto</h2>
+    <table class="quote">
+      <thead>
+        <tr><th>Item</th><th style="text-align:right;">Valor</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item"><strong>Tour 360° · Recepção</strong><span>Captação e publicação no Google Maps</span></td>
+          <td class="val">R$ 650,00</td>
+        </tr>
+        <tr>
+          <td class="item"><strong>Tour 360° · Clínica completa</strong><span>Recepção + demais ambientes, média de R$150 a cada 2 espaços</span></td>
+          <td class="val">A combinar<small>sob avaliação</small></td>
+        </tr>
+        <tr>
+          <td class="item"><strong>Vídeo aéreo · Rota Praça → Unnika</strong><span>Captação e edição do trajeto até a clínica</span></td>
+          <td class="val">R$ 250,00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="quote-foot">
+      <span>Proposta válida por 15 dias a partir de 19/08/2026.</span>
+      <span>Condições de pagamento e agendamento a combinar.</span>
+    </div>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Vamos fechar esse giro?</h2>
+    <p>Chama a Giro Mídia no WhatsApp para agendar a visita técnica e definir os detalhes com a Unnika.</p>
+    <a class="btn btn-primary" style="background:var(--graphite);color:#fff;" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Vi%20a%20proposta%20da%20Giro%20M%C3%ADdia%20para%20a%20Unnika%20e%20quero%20fechar." target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">
+      <img src="https://giromidia.com/assets/logo_giro.png" alt="Giro Mídia" style="filter:none;">
+      Giro Mídia
+    </div>
+    <span>Francisco Beltrão — PR · Proposta preparada para Unnika Centro Odontológico</span>
+    <a href="https://www.instagram.com/giro_midia_/" target="_blank" rel="noopener">@giro_midia_</a>
+  </div>
+</footer>
+
+</body>
+</html>
