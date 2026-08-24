@@ -466,13 +466,21 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:920px){
-    .svc-grid{grid-template-columns:repeat(2,1fr);}
-    .sobre-grid{grid-template-columns:1fr;}
-    .insta-wrap{grid-template-columns:1fr;}
-    .contato-panel{grid-template-columns:1fr;}
-    .nav-links{display:none;}
-    .burger{display:flex;}
+  nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+  .nav-cta{
+    margin-left: auto;
+  }
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .sobre-grid{grid-template-columns:1fr;}
+  .insta-wrap{grid-template-columns:1fr;}
+  .contato-panel{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .burger{display:flex;}
+}
   @media (max-width:920px){
     header.open .nav-links{
       display:flex; position:absolute; top:100%; left:0; right:0;
