@@ -4,8 +4,8 @@
 <meta name="google-site-verification" content="zGXBXwtXJ0wbW_2si4HaL9UJQooPetM5cC0xvVTr74E" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VSK Agência — Ver de cima muda tudo</title>
-<meta name="description" content="VSK Agência (antiga Giro Mídia): fotografia, vídeo, drone e tours virtuais 360° em Francisco Beltrão e região Sudoeste do Paraná. Ver de cima muda tudo.">
+<title>Vídeo, Drone e Tour 360° em Francisco Beltrão | VSK Agência</title>
+<meta name="description" content="Vídeo de imóvel, drone e tour virtual 360° para imobiliárias, comércios e eventos em Francisco Beltrão - PR. Pacote Lançamento: 3 vídeos por R$ 600. Peça orçamento no WhatsApp.">
 <meta name="keywords" content="vsk agencia, giro midia, producao audiovisual francisco beltrao, videos institucionais parana, filmagem de eventos francisco beltrao, drone francisco beltrao, tour virtual 360">
 <meta name="author" content="VSK Agência">
 <meta name="robots" content="index, follow">
@@ -236,6 +236,68 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
 .insta-avatar{overflow:hidden;background:none;border:0}
 .insta-avatar svg{width:100%;height:100%}
+
+/* ===== CONVERSÃO ===== */
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.1em;font-weight:700;text-transform:uppercase;color:var(--accent);border:1px solid rgba(20,184,166,.45);background:rgba(20,184,166,.1);padding:7px 14px;border-radius:999px;margin-bottom:22px}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(20,184,166,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(20,184,166,0)}100%{box-shadow:0 0 0 0 rgba(20,184,166,0)}}
+.hero-trust{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;font-size:13.5px;color:#d5d3cc}
+.hero-trust span::before{content:'✓';color:var(--accent);font-weight:700;margin-right:8px}
+.link-quiet{font-size:14px;color:#e2e0da;text-decoration:underline;text-underline-offset:5px;text-decoration-color:rgba(245,241,234,.35);padding:12px 6px}
+.link-quiet:hover{text-decoration-color:var(--accent);color:var(--text)}
+
+.seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.seg-card{padding:6px;border-radius:30px;background:rgba(245,241,234,.04);border:1px solid var(--line)}
+.seg-in{height:100%;border-radius:24px;background:var(--panel);box-shadow:inset 0 1px 0 rgba(245,241,234,.09);padding:34px 30px;display:flex;flex-direction:column}
+.seg-in .svc-num{margin-bottom:6px}
+.seg-in h3{font-size:25px;margin:8px 0 12px}
+.seg-in p{color:var(--muted);font-size:15px}
+.seg-in ul{margin:18px 0 24px;display:flex;flex-direction:column;gap:9px;font-size:14.5px}
+.seg-in li::before{content:'→';color:var(--accent);margin-right:10px}
+.seg-in .btn{margin-top:auto;align-self:flex-start}
+.seg-price{font-size:13px;color:var(--muted);margin-bottom:18px}
+.seg-price b{color:var(--text);font-weight:600}
+
+#pacote{background:var(--panel-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.offer{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:stretch;border:1px solid var(--line);border-radius:32px;padding:clamp(30px,5vw,60px);background:radial-gradient(circle at 85% 15%,rgba(20,184,166,.14),transparent 55%),var(--panel);box-shadow:0 40px 80px -40px rgba(2,6,18,.9)}
+.offer h2{font-size:clamp(32px,4.4vw,50px);margin-bottom:16px}
+.offer p{color:var(--muted);max-width:48ch}
+.offer-list{margin:24px 0 0;display:flex;flex-direction:column;gap:11px;font-size:15px}
+.offer-list li::before{content:'✓';color:var(--accent);font-weight:700;margin-right:12px}
+.offer-box{border:1px solid var(--line);border-radius:24px;background:var(--ink);padding:34px 30px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.offer-box .was{color:var(--muted);text-decoration:line-through;font-size:16px}
+.offer-box .now{font-family:var(--ff-display);font-weight:800;font-size:clamp(46px,6vw,68px);letter-spacing:-.04em;line-height:1}
+.offer-box .now small{font-size:.38em;letter-spacing:0;font-weight:600;color:var(--muted);margin-right:4px}
+.offer-box .note{color:var(--muted);font-size:13.5px;margin:10px 0 22px}
+.offer-box .btn{align-self:flex-start}
+.pricing-ref{display:flex;flex-wrap:wrap;gap:12px 36px;margin-top:34px;color:var(--muted);font-size:14.5px}
+.pricing-ref b{color:var(--text);font-weight:600}
+
+.guarantee{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.guarantee div{border:1px solid var(--line);border-radius:24px;padding:28px 26px;background:var(--panel)}
+.guarantee h3{font-size:21px;margin-bottom:10px}
+.guarantee p{color:var(--muted);font-size:14.5px}
+
+.faq{max-width:820px}
+.faq details{border-bottom:1px solid var(--line);padding:0}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-weight:600;font-size:16.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:24px;color:var(--accent);transition:transform .4s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);font-size:15px;padding:0 40px 24px 0;max-width:62ch}
+
+.fab{position:fixed;right:18px;bottom:18px;z-index:95;display:flex;align-items:center;gap:10px;background:#25d366;color:#08210f;font-weight:700;font-size:14px;padding:14px 20px 14px 16px;border-radius:999px;box-shadow:0 14px 34px -10px rgba(0,0,0,.65);transition:transform .4s var(--ease),background .3s}
+.fab:hover{transform:translateY(-3px);background:#3be07b}
+.fab svg{width:24px;height:24px;flex:none}
+@media (max-width:920px){
+.seg-grid,.guarantee,.offer{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+.fab{right:12px;bottom:12px;padding:14px}
+.fab span{display:none}
+.hero-ctas .btn-accent{width:100%;justify-content:space-between}
+}
 </style>
 </head>
 <body>
@@ -248,14 +310,14 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 <nav>
 <a href="#top" class="brand" aria-label="VSK Agência"><span class="lock"><svg aria-hidden="true"><use href="#mk-l"/></svg><span><b>VSK</b><small>AGÊNCIA</small></span></span></a>
 <ul class="nav-links">
-<li><a href="#servicos">Serviços</a></li>
+<li><a href="#servicos">Para quem</a></li>
 <li><a href="#tour">Tour 360°</a></li>
+<li><a href="#pacote">Lançamento</a></li>
 <li><a href="#trabalhos">Trabalhos</a></li>
-<li><a href="#sobre">Cobertura</a></li>
-<li><a href="#contato">Contato</a></li>
+<li><a href="#faq">Dúvidas</a></li>
 </ul>
 <div class="nav-cta">
-<a class="btn btn-accent" href="https://wa.me/5546999711954" target="_blank" rel="noopener"><span>WhatsApp</span><i class="arr" aria-hidden="true">↗</i></a>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Vi%20o%20site%20da%20VSK%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener"><span>Orçamento</span><i class="arr" aria-hidden="true">↗</i></a>
 <button class="burger" id="burgerBtn" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div>
 </nav>
@@ -268,16 +330,15 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 <source src="assets/capa_hero.mp4" type="video/mp4">
 </video>
 <div class="wrap hero-inner">
-<div class="eyebrow">Francisco Beltrão — PR</div>
-<h1>Ver de cima<br>muda <span class="accent">tudo</span></h1>
-<p class="lede">Fotografia, vídeo, drone e tours virtuais em 360° para negócios, imóveis e eventos em Francisco Beltrão e região.</p>
+<div class="badge"><i></i>Condição de lançamento: 5 vagas</div>
+<h1>Vídeo e tour 360° que fazem seu negócio <span class="accent">vender mais</span></h1>
+<p class="lede">Imobiliárias, comércios e eventos de Francisco Beltrão com imagem profissional, drone e entrega pronta para postar. Estamos começando, por isso nossos primeiros clientes têm preço especial e atenção total.</p>
 <div class="hero-ctas">
-<a class="btn btn-accent" href="#tour"><span>Ver tour 360°</span><i class="arr" aria-hidden="true">↓</i></a>
-<a class="btn btn-ghost" href="#trabalhos">Ver trabalhos</a>
-<a class="btn btn-ghost" href="https://wa.me/5546999711954" target="_blank" rel="noopener">Falar no WhatsApp</a>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Vi%20o%20site%20da%20VSK%20e%20quero%20saber%20sobre%20a%20condi%C3%A7%C3%A3o%20de%20lan%C3%A7amento." target="_blank" rel="noopener"><span>Garantir vaga de lançamento</span><i class="arr" aria-hidden="true">↗</i></a>
+<a class="link-quiet" href="#tour">Ver tour 360° de exemplo ↓</a>
 </div>
-<div class="hero-tags">
-<span>Fotografia</span><span>Vídeo &amp; Drone</span><span>Tour Virtual 360°</span><span>Cobertura de Eventos</span>
+<div class="hero-trust">
+<span>Você fala direto com quem grava</span><span>Garantia: se não gostar, refazemos</span><span>Orçamento sem compromisso</span>
 </div>
 </div>
 </section>
@@ -285,15 +346,36 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 <section id="servicos">
 <div class="wrap">
 <div class="section-head">
-<div class="eyebrow">Serviços</div>
-<h2>Qualidade profissional em cada entrega.</h2>
-<p>Da fotografia ao tour 360°, todo trabalho da VSK Agência passa pelo mesmo cuidado técnico e visual, feito para representar bem a sua marca, do primeiro clique à entrega final.</p>
+<div class="eyebrow">Para quem</div>
+<h2>Feito para quem precisa mostrar bem o que vende.</h2>
+<p>Cada tipo de negócio tem uma necessidade. Escolha a sua e peça um orçamento já com o assunto certo.</p>
 </div>
-<div class="svc-grid">
-<div class="svc-card"><div class="svc-in"><div class="svc-num">Foto</div><h3>Fotografia</h3><p>Imagens profissionais de fachadas, produtos, imóveis e eventos, com tratamento de cor e entrega rápida em alta resolução.</p></div></div>
-<div class="svc-card"><div class="svc-in"><div class="svc-num">Vídeo</div><h3>Vídeo &amp; Drone</h3><p>Vídeos institucionais e aéreos, do roteiro à edição final, prontos para redes sociais, site ou apresentações.</p></div></div>
-<div class="svc-card"><div class="svc-in"><div class="svc-num">360°</div><h3>Tour Virtual 360°</h3><p>Passeios imersivos e navegáveis para comércios, imóveis e espaços públicos: o visitante explora como se estivesse no local.</p></div></div>
-<div class="svc-card"><div class="svc-in"><div class="svc-num">Eventos</div><h3>Cobertura de Eventos</h3><p>Registro completo de eventos corporativos e sociais, com edição ágil para publicação ainda no calor do momento.</p></div></div>
+<div class="seg-grid">
+<div class="seg-card"><div class="seg-in">
+<div class="svc-num">Imobiliárias</div><h3>Imóvel que se mostra sozinho</h3>
+<p>Vídeo com drone e tour 360° para o cliente conhecer o imóvel antes de agendar visita. Menos visita perdida, mais interessado de verdade.</p>
+<ul><li>Vídeo de imóvel editado, pronto para anúncio</li><li>Imagens aéreas do terreno e da vizinhança</li><li>Tour 360° navegável (sob consulta)</li></ul>
+<div class="seg-price">Vídeo de imóvel: <b>R$ 350</b></div>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Sou%20de%20imobili%C3%A1ria%20e%20quero%20um%20or%C3%A7amento%20de%20v%C3%ADdeo%20de%20im%C3%B3vel." target="_blank" rel="noopener"><span>Orçar para imobiliária</span><i class="arr" aria-hidden="true">↗</i></a>
+</div></div>
+<div class="seg-card"><div class="seg-in">
+<div class="svc-num">Comércios</div><h3>Sua loja bonita onde o cliente procura</h3>
+<p>Vídeo curto e tour 360° para o Instagram, o WhatsApp e o Google. Quem vê o espaço antes, entra com mais vontade de comprar.</p>
+<ul><li>Vídeo da fachada, do ambiente e dos produtos</li><li>Tour 360° do espaço (sob consulta)</li><li>Material pronto para redes sociais</li></ul>
+<div class="seg-price">Orçamento <b>sob consulta</b>, conforme o projeto</div>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Tenho%20um%20com%C3%A9rcio%20e%20quero%20um%20or%C3%A7amento%20de%20v%C3%ADdeo." target="_blank" rel="noopener"><span>Orçar para comércio</span><i class="arr" aria-hidden="true">↗</i></a>
+</div></div>
+<div class="seg-card"><div class="seg-in">
+<div class="svc-num">Eventos</div><h3>Registro pronto para postar</h3>
+<p>Cobertura em vídeo e drone com edição ágil, para você publicar enquanto o assunto ainda está quente.</p>
+<ul><li>Captação do evento, em solo e do alto</li><li>Edição rápida para redes sociais</li><li>Prazo combinado antes de fechar</li></ul>
+<div class="seg-price">Orçamento <b>sob consulta</b>, conforme a duração</div>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20para%20cobertura%20de%20evento." target="_blank" rel="noopener"><span>Orçar evento</span><i class="arr" aria-hidden="true">↗</i></a>
+</div></div>
+</div>
+<div class="pricing-ref">
+<span>Drone (imagens brutas): <b>R$ 350 a R$ 700</b>, conforme o tempo de voo</span>
+<span>Tour 360° e fotografia: <b>sob consulta</b></span>
 </div>
 </div>
 </section>
@@ -302,8 +384,8 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 <div class="wrap">
 <div class="section-head">
 <div class="eyebrow">Tour Virtual 360°</div>
-<h2>Arraste. Gire. Explore.</h2>
-<p>Um exemplo real de tour 360° produzido pela VSK Agência. Clique e arraste dentro da janela para olhar em qualquer direção.</p>
+<h2>Seu cliente visita sem sair de casa.</h2>
+<p>Um tour real produzido pela VSK. Clique e arraste dentro da janela para olhar em qualquer direção, como o seu cliente faria no seu imóvel ou na sua loja.</p>
 </div>
 <div class="tour-frame" id="tourFrame">
 <iframe src="https://kreftav.github.io/panoramas/" title="Tour virtual 360° — VSK Agência" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
@@ -316,13 +398,37 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 </div>
 </section>
 
+<section id="pacote">
+<div class="wrap">
+<div class="offer">
+<div>
+<div class="badge"><i></i>5 vagas de lançamento</div>
+<h2>Pacote Lançamento: 3 vídeos por R$ 600</h2>
+<p>Estamos montando nosso portfólio em Francisco Beltrão. Quem entrar agora paga cerca de 43% menos e recebe atenção total em cada vídeo.</p>
+<ul class="offer-list">
+<li>3 vídeos captados e editados, prontos para postar</li>
+<li>Para imobiliária, comércio ou evento, você escolhe</li>
+<li>Drone pode ser incluído, com valor combinado antes</li>
+<li>Em troca, você nos autoriza a usar o material no nosso portfólio</li>
+</ul>
+</div>
+<div class="offer-box">
+<span class="was">De R$ 1.050</span>
+<span class="now"><small>por</small>R$ 600</span>
+<p class="note">Apenas 5 vagas. Orçamento e data combinados pelo WhatsApp, sem compromisso.</p>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Quero%20garantir%20uma%20vaga%20no%20Pacote%20Lan%C3%A7amento%20(3%20v%C3%ADdeos%20por%20R%24%20600)." target="_blank" rel="noopener"><span>Garantir minha vaga</span><i class="arr" aria-hidden="true">↗</i></a>
+</div>
+</div>
+</div>
+</section>
+
 <section id="trabalhos">
 <div class="wrap">
 <div class="trab-top">
 <div class="section-head">
 <div class="eyebrow">Trabalhos</div>
-<h2>Projetos recentes.</h2>
-<p>Vídeos produzidos para diferentes setores da região.</p>
+<h2>Exemplos do nosso trabalho.</h2>
+<p>Vídeo e drone captados na região. Os próximos cases dos clientes de lançamento entram aqui.</p>
 </div>
 <div class="car-ctrl"><span class="car-count" id="carCount" aria-live="polite">01 / 02</span>
 <button class="car-btn" id="carPrev" aria-label="Projeto anterior">←</button>
@@ -363,6 +469,37 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 </div>
 </section>
 
+<section id="garantia">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Sem risco</div>
+<h2>Estamos começando. Por isso o risco é todo nosso.</h2>
+</div>
+<div class="guarantee">
+<div><h3>Garantia de refação</h3><p>Se o resultado não for o que combinamos, refazemos a edição sem custo.</p></div>
+<div><h3>Fala direto com quem grava</h3><p>Sem intermediário e sem fila. Você alinha com a pessoa que vai captar e editar.</p></div>
+<div><h3>Prazo e valor claros</h3><p>Antes de fechar você sabe o que vai receber, quanto custa e quando entrega.</p></div>
+</div>
+</div>
+</section>
+
+<section id="faq">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Dúvidas</div>
+<h2>Perguntas frequentes.</h2>
+</div>
+<div class="faq">
+<details><summary>Quanto custa?</summary><p>Vídeo de imóvel a partir de R$ 350. Imagens de drone brutas de R$ 350 a R$ 700, conforme o tempo de voo. Tour 360° e fotografia são sob consulta. No Pacote Lançamento, 3 vídeos saem por R$ 600.</p></details>
+<details><summary>Como funciona o Pacote Lançamento?</summary><p>São 5 vagas para quem fechar 3 vídeos de uma vez. Você paga menos e, em troca, autoriza o uso do material no nosso portfólio. Quando as vagas acabam, voltamos ao valor normal.</p></details>
+<details><summary>Qual o prazo de entrega?</summary><p>Combinamos o prazo com você antes de fechar, de acordo com o tamanho do projeto. Para eventos, trabalhamos com edição ágil para você publicar logo.</p></details>
+<details><summary>Atendem fora de Francisco Beltrão?</summary><p>Sim, atendemos a região Sudoeste do Paraná. Pode haver custo de deslocamento, que informamos no orçamento.</p></details>
+<details><summary>Posso usar o material nos meus anúncios e redes sociais?</summary><p>Sim. Os arquivos são entregues prontos para redes sociais, site e anúncios.</p></details>
+<details><summary>E se eu não gostar do resultado?</summary><p>Refazemos a edição sem custo, até chegar no que combinamos.</p></details>
+</div>
+</div>
+</section>
+
 <section id="instagram">
 <div class="wrap">
 <div class="insta-card">
@@ -384,9 +521,9 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 <div class="contato-panel">
 <div>
 <div class="eyebrow">Contato</div>
-<h2>Vamos fechar o giro?</h2>
-<p>Conte o que você precisa registrar. A resposta mais rápida é sempre pelo WhatsApp.</p>
-<a class="btn btn-accent" href="https://wa.me/5546999711954" target="_blank" rel="noopener"><span>Chamar no WhatsApp</span><i class="arr" aria-hidden="true">↗</i></a>
+<h2>Peça seu orçamento em 2 minutos.</h2>
+<p>Conte o que você precisa registrar e receba valor e prazo pelo WhatsApp. Sem compromisso.</p>
+<a class="btn btn-accent" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Vi%20o%20site%20da%20VSK%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener"><span>Pedir orçamento</span><i class="arr" aria-hidden="true">↗</i></a>
 </div>
 <ul class="contato-list">
 <li><span class="k">WhatsApp</span><span class="v"><a href="https://wa.me/5546999711954" target="_blank" rel="noopener">(46) 99971-1954</a></span></li>
@@ -410,6 +547,8 @@ header.open .nav-links{top:calc(100% + 10px);border:1px solid var(--line);border
 <span>© 2026 VSK Group · VSK Agência, antiga Giro Mídia · Francisco Beltrão, PR. Todos os direitos reservados.</span>
 </div>
 </footer>
+
+<a class="fab" href="https://wa.me/5546999711954?text=Ol%C3%A1!%20Vi%20o%20site%20da%20VSK%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Chamar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.2 2 11.4c0 2.2.8 4.200 2.200 5.800L3 22l5-1.600c1 .4 2.100.6 3.200.6 5.500 0 10-4.200 10-9.400S17.500 2 12 2z"/></svg><span>Pedir orçamento</span></a>
 
 <script>
 var header=document.getElementById('siteHeader'),burger=document.getElementById('burgerBtn');
@@ -459,7 +598,7 @@ upd();
 
 // Revelação ao rolar e item ativo do menu
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
-document.querySelectorAll('.section-head,.svc-card,.work-carousel,.sobre-grid>*,.insta-card,.contato-panel').forEach(function(el,i){el.classList.add('reveal');el.style.transitionDelay=(i%3*80)+'ms';io.observe(el);});
+document.querySelectorAll('.section-head,.seg-card,.offer,.guarantee>div,.faq,.work-carousel,.sobre-grid>*,.insta-card,.contato-panel').forEach(function(el,i){el.classList.add('reveal');el.style.transitionDelay=(i%3*80)+'ms';io.observe(el);});
 var links={};document.querySelectorAll('.nav-links a').forEach(function(a){links[a.getAttribute('href')]=a;});
 var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].classList.remove('is-active');});var l=links['#'+e.target.id];if(l)l.classList.add('is-active');}});},{rootMargin:'-45% 0px -50% 0px'});
 document.querySelectorAll('main section[id]').forEach(function(sec){spy.observe(sec);});
